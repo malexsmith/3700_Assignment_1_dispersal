@@ -77,7 +77,9 @@ BrowseSeqs(DNA.no_trans.1)
 
 # The next code block saves your aligned DNA sequences as a 'fasta' file - standard for dna sequences. If you're curious, you can use a notepad to open it and explore if you'd like. 
 
-writeXStringSet(DNA.no_trans.1, file="dispersal_sequences_aligned.fasta")dispersal_sequences_align <- read.dna("dispersal_sequences_aligned.fasta", format="fasta", as.matrix=TRUE)
+writeXStringSet(DNA.no_trans.1, file="dispersal_sequences_aligned.fasta")
+
+dispersal_sequences_align <- read.dna("dispersal_sequences_aligned.fasta", format="fasta", as.matrix=TRUE)
 
 write.dna( DNA.no_trans.1, file = 'dispersal_sequences_aligned.fasta', format = 'fasta' )
 
