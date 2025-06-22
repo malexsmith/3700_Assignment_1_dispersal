@@ -77,8 +77,8 @@ BrowseSeqs(DNA.no_trans.1)
 
 # The next code block saves your aligned DNA sequences as a 'fasta' file - standard for dna sequences. If you're curious, you can use a notepad to open it and explore if you'd like. 
 
-writeXStringSet(DNA.no_trans.1, file="dispersal_sequences_aligned.fasta")
-dispersal_sequences_align <- read.dna("dispersal_sequences_aligned.fasta", format="fasta", as.matrix=TRUE)
+writeXStringSet(DNA.no_trans.1, file="dispersal_sequences_aligned.fasta")dispersal_sequences_align <- read.dna("dispersal_sequences_aligned.fasta", format="fasta", as.matrix=TRUE)
+
 write.dna( DNA.no_trans.1, file = 'dispersal_sequences_aligned.fasta', format = 'fasta' )
 
 # Now that you've added sequences and aligned them it's time to make a phylogeny with your aligned sequences. There are many ways to make a phylogeny - we're going to try 2, ML and NJ. 
@@ -86,40 +86,64 @@ write.dna( DNA.no_trans.1, file = 'dispersal_sequences_aligned.fasta', format = 
 # This block will make a Maximum Likelihood (ML) tree called "rooted_ml_tree"
 
 grass.phy <- read.phyDat('dispersal_sequences_aligned.fasta', format = 'fasta', type = 'DNA')
+
 grass.align <- read.dna('dispersal_sequences_aligned.fasta', format = 'fasta')
+
 grass.phy <- phyDat(grass.align)
+
 grass.phy
+
 dist <- dist.ml(grass.align)
+
 nj.tree <- nj(dist)
+
 fit <- pml(nj.tree, data = grass.phy)
+
 fit
+
 fitJC <- optim.pml(fit, rearrangement = "NNI")
+
 plot(fitJC$tree, main = "JC, NNI rearrangement")
+
 write.tree(fitJC$tree, file="grass_ml.tre")
+
 phy_ml = read.tree(file = "grass_ml.tre")
+
 rooted_ml_tree <- midpoint.root(phy_ml)
+
 plot(rooted_ml_tree)
 
 # This block makes an Neighbour-Joining tree called 'phy'
 D <- dist.dna(grass.align, model="K80")
+
 D
+
 class(D)
+
 length(D)
+
 phy <- nj(D)
+
 class(phy)
+
 rooted_tree <- midpoint.root(phy)
+
 plot(rooted_tree)
 
 # In the next block we're going to plot your tree in a ggplot fashion rather than base R using the package ggtree. First your nj tree (tip label is set large (to 7) for what you need eventually in printing - you can reduce it if you'd like. 
 test = ggplot(rooted_tree) + geom_tree() + theme_tree()+ geom_treescale()+geom_tiplab(size=7)
+
 test
 
 # then your ml tree
 test2 = ggplot(rooted_ml_tree) + geom_tree() + theme_tree()+ geom_treescale()+geom_tiplab(size=7)
+
 test2
 
 pdf("dispersal sequences test - 250622.pdf", width = 18, height = 12) # Open a new pdf file
+
 test
+
 dev.off()
 
 # Congratulations - you have a made a phylogeny!  Now you need to append information about these sequences.  To do this, you need the file 3700 test genbank metadata.csv. This .csv file includes the site information associated with each sample sequence. Remember to make sure that this .csv file is in whatever directory/folder you set as the working directory
@@ -140,10 +164,13 @@ gheatmap(test2, genbank_seq_metadata , low = "white",high = "#1099dd",offset=0.0
 # Now that you've made the two phylogenies and appended the site information, you can use the pdf command below to make a pdf of your plots so you can print them for your video. 
 
 pdf("dispersal sequences with metadata - 250622.pdf", width = 18, height = 12) # Open a new pdf file
+
 gheatmap(test, genbank_seq_metadata , low = "white",high = "#1099dd",offset=0.03, width=0.15, font.size=6, 
          colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal")+ theme(legend.position="none")
+
 gheatmap(test2, genbank_seq_metadata , low = "white",high = "#1099dd",offset=0.03, width=0.15, font.size=6, 
          colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal")+ theme(legend.position="none")
+
 dev.off()
 
 # So - hats off to you!! You've made two kinds of  phylogeny from publicly available DNA sequences that were collected from two genera of deep-sea vent copepods. Print your pdf, and prepare to speak about conclusions you might make regarding the larval dispersal of the species within each genus based on your phylogeny.
