@@ -1,19 +1,12 @@
-# 3700-dispersal
-test
+# 3700 Assignment 2 : Dispersal from deep sea vents inferred from mtDNA 
 
-# code blocks to download public dna sequences, align them, and create phylogenies to complete assignment 2
-# please note that you should have the most up to date version of R installed
-# along with R studio
-# and that you are connected to the internet throughout.  
+# Code blocks that will help you download public dna sequences, align them, and create phylogenies to complete assignment 2. Please note that you should have the most up to date version of R installed along with R studio and that you are connected to the internet throughout. 
 
-# this first block of code clears your working environment in case you've been using 
-# R for something else.  
-# and then confirms what version of R you are running
+# This first block of code clears your working environment in case you've been using R for something else and then confirms what version of R you are running
 
 rm(list=ls())
 
-# You need a new version of R - at least 4.3.3. 
-# check this by entering:
+# You need a new version of R - at least 4.3.3. You  check this by entering:
 R.version
 
 # next block of code tells you where your working directory is 
@@ -126,9 +119,6 @@ fitJC <- optim.pml(fit, rearrangement = "NNI")
 plot(fitJC$tree, main = "JC, NNI rearrangement")
 
 
-fitJC <- optim.pml(fit, rearrangement = "stochastic", control = pml.control(trace = 0))
-plot(fitJC$tree, main = "JC, stochastic rearrangement")
-
 write.tree(fitJC$tree, file="grass_ml.tre")
 
 phy_ml = read.tree(file = "grass_ml.tre")
@@ -144,9 +134,10 @@ length(D)
 
 phy <- nj(D)
 class(phy)
-plot(phy)
+
 
 rooted_tree <- midpoint.root(phy)
+plot(rooted_tree)
 
 # In the next block we're going to plot your tree in a ggplot fashion rather than base R using ggtree
 
@@ -158,11 +149,12 @@ test
 test2 = ggplot(rooted_ml_tree) + geom_tree() + theme_tree()+ geom_treescale()+geom_tiplab(size=7)
 test2
 
-pdf("dispersal sequences test - 25066.pdf", width = 18, height = 12) # Open a new pdf file
+pdf("dispersal sequences test - 250622.pdf", width = 18, height = 12) # Open a new pdf file
 test
 dev.off()
 
 # this .csv file includes the site information associated with each sample
+# make sure that this .csv file is in whatever directory/folder you set as the working directory
 
 genbank_seq_metadata <- read.csv(file = "3700 test genbank metadata.csv",head=TRUE, sep=",", row.names = 1)
 
