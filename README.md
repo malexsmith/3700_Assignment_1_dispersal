@@ -20,7 +20,7 @@ getwd()
 
 setwd("C:\\Users\\malex\\Sync\\R")
 
-# This next block of code will install a package called BioManager that will then install 8 further packages if you have not already installed them. If you have already installed them, skip to the library() commands below and these will open the packages you need. 
+# This next block of code will install a package called BioManager that will then install 9 further packages if you have not already installed them. If you have already installed them, skip to the library() commands below and these will open the packages you need. 
 
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager");
@@ -33,6 +33,7 @@ BiocManager::install("ggtree");
 BiocManager::install("ggplot2");
 BiocManager::install("phytools");
 BiocManager::install("picante")
+BiocManager::install("imager")
 
 library(ape); 
 library(DECIPHER);
@@ -42,6 +43,14 @@ library(ggtree);
 library(ggplot2);
 library(phytools);
 library(picante);
+library(imager);
+
+
+# This next block of code is going to plot a map of the sampling sites where your copepods were collected. 
+
+map<-load.image("3700 genetic sampling sites.jpg")
+plot(map,axes=FALSE)
+
 
 # The next block of code goes to GenBank and downloads public sequences. These sequences are COI mitochondrial DNA barcodes from two species of deep-sea vent invertebrate. You can explore GenBank at https://www.ncbi.nlm.nih.gov/nucleotide/
 
@@ -163,16 +172,21 @@ gheatmap(test2, genbank_seq_metadata , low = "white",high = "#1099dd",offset=0.0
          colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal")+ theme(legend.position="none")
 
 
-# Now that you've made the two phylogenies and appended the site information, you can use the pdf command below to make a pdf of your plots so you can print them for your video. 
+# Now that you've made the two phylogenies and appended the site information, you can use the pdf command below to make a pdf of your phylogenies and the map so you can print them for your video. 
 
-pdf("dispersal sequences with metadata - 250622.pdf", width = 18, height = 12) # Open a new pdf file
+pdf("dispersal sequences with metadata - 250623.pdf", width = 18, height = 12) # Open a new pdf file
 
 gheatmap(test, genbank_seq_metadata , low = "white",high = "#1099dd",offset=0.03, width=0.15, font.size=6, 
-         colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal")+ theme(legend.position="none")
+         colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal w NJ tree")+ theme(legend.position="none")
 
 gheatmap(test2, genbank_seq_metadata , low = "white",high = "#1099dd",offset=0.03, width=0.15, font.size=6, 
-         colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal")+ theme(legend.position="none")
+         colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal w ML tree")+ theme(legend.position="none")
+
+plot(map,axes=FALSE)
 
 dev.off()
 
-# So - hats off to you!! You've made two kinds of phylogeny from publicly available DNA sequences that were collected from two genera of deep-sea vent copepods. Now, print your pdf, and prepare to speak about conclusions you might make regarding the larval dispersal of the two genera based on your phylogeny.
+# So - hats off to you!! You've made two kinds of phylogeny from publicly available DNA sequences that were collected from two genera of deep-sea vent copepods. Now, print your pdf, examine the map from the assignment, and prepare to speak about conclusions you might make regarding the larval dispersal of the two genera based on your phylogeny.
+
+
+
