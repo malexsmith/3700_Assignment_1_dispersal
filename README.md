@@ -23,25 +23,25 @@ setwd("C:\\Users\\malex\\Sync\\R")
 # This next block of code will install a package called BioManager that will then install 8 further packages if you have not already installed them. If you have already installed them, skip to the library() commands below and these will open the packages you need. 
 
 if (!require("BiocManager", quietly = TRUE))
-  install.packages("BiocManager")
+  install.packages("BiocManager");
 
-BiocManager::install("bipartite")
-BiocManager::install("ape")
-BiocManager::install("DECIPHER")
-BiocManager::install("phangorn")
-BiocManager::install("ggtree")
-BiocManager::install("ggplot2")
-BiocManager::install("phytools")
+BiocManager::install("bipartite");
+BiocManager::install("ape");
+BiocManager::install("DECIPHER");
+BiocManager::install("phangorn");
+BiocManager::install("ggtree");
+BiocManager::install("ggplot2");
+BiocManager::install("phytools");
 BiocManager::install("picante")
 
-library(ape) 
-library(DECIPHER)
-library(phangorn)
-library(bipartite)
-library(ggtree)
-library(ggplot2)
-library(phytools)
-library(picante)
+library(ape); 
+library(DECIPHER);
+library(phangorn);
+library(bipartite);
+library(ggtree);
+library(ggplot2);
+library(phytools);
+library(picante);
 
 # The next block of code goes to GenBank and downloads public sequences. These sequences are COI mitochondrial DNA barcodes from two species of deep-sea vent invertebrate. You can explore GenBank at https://www.ncbi.nlm.nih.gov/nucleotide/
 
