@@ -1,4 +1,4 @@
-# ZOO*3700 Assignment 2 : Dispersal among deep-sea vents inferred from public mtDNA sequence
+# ZOO*3700 Assignment 2 : Dispersal among deep-sea vents inferred from public mtDNA sequences
 
 # These code blocks will help you download public DNA sequences, align them, and create phylogenies to complete assignment 2. Please note that you should have the most up to date version of R installed along with R studio and that you are connected to the internet throughout. 
 
@@ -48,13 +48,13 @@ library(picante);
 library(imager);
 
 
-# This next block of code is going to plot a map of the deep-sea vent sampling sites where your copepods were collected. 
+# This next block of code is going to plot a map of the deep-sea vent sampling sites where your deep-sea vent taxa were collected. In this case, for two species of copepod collected at two basins. 
 
 map<-load.image("3700 genetic sampling sites.jpg")
 plot(map,axes=FALSE, main = "Deep-sea vents where copepods were sampled")
 
 
-# The next block of code goes to GenBank and downloads public sequences. These sequences are COI mitochondrial DNA barcodes from two species of deep-sea vent invertebrate. You can explore GenBank at https://www.ncbi.nlm.nih.gov/nucleotide/
+# The next block of code goes to GenBank and downloads the public DNA sequences for your two species of deep-sea vent copepod. These sequences are COI mitochondrial DNA barcodes. You can explore GenBank at https://www.ncbi.nlm.nih.gov/nucleotide/
 
 dispersal_sequences = read.GenBank(c("OQ693582", "OQ693581", "OQ693580", "OQ693579", "OQ693578", "OQ693577", "OQ693576", "OQ693575", "OQ693574", "OQ693573", "OQ693572", "OQ693571", "OQ693570", "OQ693569", "OQ693568", "OQ693567", "OQ693566", "OQ693565", "OQ693564", "OQ693563", "OQ693497", "OQ693478", "OQ693473", "OQ693460", "OQ693458", "OQ693457", "OQ693434", "OQ693415", "OQ693414", "OQ693413", "OQ693104", "OQ693098", "OQ693097", "OQ693096", "OQ693087", "OQ693069", "OQ693054", "OQ693049", "OQ693044", "OQ693042"))
 
@@ -92,9 +92,7 @@ write.dna(DNA.no_trans.1, file = 'dispersal_sequences_aligned.fasta', format = '
 
 # Now that you've added sequences and aligned them it's time to make a phylogeny with your aligned sequences. There are many ways to make a phylogeny - we're going to try 2, ML and NJ. 
 
-# This block will make a Maximum Likelihood (ML) tree called "rooted_ml_tree"
-
-grass.phy <- read.phyDat('dispersal_sequences_aligned.fasta', format = 'fasta', type = 'DNA')
+# This block will make a Maximum Likelihood (ML) tree called "phy_ml"
 
 grass.align <- read.dna('dispersal_sequences_aligned.fasta', format = 'fasta')
 
@@ -118,7 +116,7 @@ write.tree(fitJC$tree, file="grass_ml.tre")
 
 phy_ml = read.tree(file = "grass_ml.tre")
 
-# Your sequences are from two species - this next block will place the root of your phylogeny at the midpoint. 
+# Your sequences are from two species - this next block will place the root of your phylogeny at the midpoint for "rooted_ml_tree". 
 
 rooted_ml_tree <- midpoint.root(phy_ml)
 
