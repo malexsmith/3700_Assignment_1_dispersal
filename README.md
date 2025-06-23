@@ -74,7 +74,7 @@ dna <- readDNAStringSet(fas)
 
 BrowseSeqs(dna)
 
-# The code that follos will complete an alignment with gap opening and extending costs set high. This is because your DNA is codes for a protein (ie it has a job) and so gaps would result in your DNA  not making amino acids.
+# The code that follows will complete an alignment with gap opening and extending costs set high. This is because your DNA is codes for a protein (ie it has a job) and so gaps would result in your DNA  not making amino acids.
 
 DNA.no_trans.1 <- AlignSeqs(dna, gapOpening = c(-20, -10), gapExtension = c(-5, -1))
 
@@ -184,7 +184,7 @@ plot(map,axes=FALSE, main = "Deep-sea vents where copepods were sampled")
 
 dev.off()
 
-# So - hats off to you!! You've made two kinds of phylogeny from publicly available DNA sequences that were collected from two genera of deep-sea vent copepods. Now, print your pdf, examine the map from the assignment, and prepare to speak for three minutes (**without notes**) about the conclusions you might make regarding the larval dispersal of the two genera based on your phylogeny. Which taxon is likely to possess planktorophic larvae?  Which taxon is likely to possess leichtotrophic larvae?  Why?  What consequences will mining in Lau have on deep-sea vent copepod species? 
+# So - hats off to you!! You've made two kinds of phylogeny from publicly available DNA sequences that were collected from two genera of deep-sea vent copepods. Now, print your pdf, examine the map from the assignment, and prepare to speak for three minutes (**without notes**) about the conclusions you might make regarding the larval dispersal of the two genera based on your phylogeny. Which taxon is likely to possess planktotrophic larvae?  Which taxon is likely to possess lecithotrophic larvae?  Why?  What consequences would mining in the Lau Basin have on species living at and around deep-sea vents? 
 
 
 
