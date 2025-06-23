@@ -2,6 +2,8 @@
 
 # These code blocks will help you download public dna sequences, align them, and create phylogenies to complete assignment 2. Please note that you should have the most up to date version of R installed along with R studio and that you are connected to the internet throughout. 
 
+# To start off, if you need a new version of R, or if this is the first time you're using R, visit here https://cran.rstudio.com/ and choose the download that corresponds to your computer. AFTER installing R, you can visit here to download Rstudio desktop for your computer https://posit.co/download/rstudio-desktop/ .  Make sure to install R BEFORE installing R studio.  
+
 # This first block of code clears your working environment in case you've been using R for something else and then confirms what version of R you are running
 
 rm(list=ls())
@@ -9,9 +11,6 @@ rm(list=ls())
 # You need a new version of R - at least 4.3.3. You  check this by entering:
 
 R.version
-
-# If you need a new version of R, or if this is the first time you're using R, visit here https://cran.rstudio.com/ and choose the download that corresponds to your computer. AFTER installing R, you can visit here to download Rstudio desktop for your computer https://posit.co/download/rstudio-desktop/ .  Make sure to install R BEFORE installing R studio.  
-
 
 # The next block of code tells you where your working directory is.  The 'wd' is where to put your input files and where to check for any output files you produce
 
