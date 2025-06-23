@@ -175,4 +175,4 @@ gheatmap(test2, genbank_seq_metadata , low = "white",high = "#1099dd",offset=0.0
 
 dev.off()
 
-# So - hats off to you!! You've made two kinds of  phylogeny from publicly available DNA sequences that were collected from two genera of deep-sea vent copepods. Print your pdf, and prepare to speak about conclusions you might make regarding the larval dispersal of the species within each genus based on your phylogeny.
+# So - hats off to you!! You've made two kinds of phylogeny from publicly available DNA sequences that were collected from two genera of deep-sea vent copepods. Now, print your pdf, and prepare to speak about conclusions you might make regarding the larval dispersal of the two genera based on your phylogeny.
