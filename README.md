@@ -10,7 +10,9 @@
 
 R.version
 
-# This first block of code will clear your working environment in case you've been using R for something else.
+# This assignment is designed to be followed along in steps from start to finish.  Each step creates an output that subsequent steps depend on.  Remember to follow the code blocks in order!
+
+# This first block of code will clear your working environment in case you've been using R for something else in the past.
 
 rm(list=ls())
 
