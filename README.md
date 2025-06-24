@@ -6,7 +6,7 @@
 
 # Make sure to install R BEFORE installing R studio.  
 
-# You will need at least version 4.3.3 of R. You can check this by entering:
+# If you already have R installed on your computer, check your version - you will need at least version 4.3.3 of R. You can check what version you have by entering:
 
 R.version
 
