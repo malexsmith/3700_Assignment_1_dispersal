@@ -1,10 +1,12 @@
-# ZOO*3700 Assignment 2 : Dispersal among deep-sea vents inferred from public mtDNA sequences
+# ZOO*3700 Assignment 1 : Dispersal among and between deep-sea vents inferred from public mtDNA sequences
 
-# These code blocks will help you download public DNA sequences, align them, and create phylogenies to complete assignment 2. Please note that you should have the most up to date version of R installed along with R studio and that you are connected to the internet throughout. 
+# These code blocks will help you download public DNA sequences, align them, and create phylogenies to complete Assignment 1. Please note that you should have the most up to date version of R installed along with R studio and that you are connected to the internet throughout. 
 
-# To start off, if this is the first time you're using R (or if you need a new version), visit here https://cran.rstudio.com/ and choose the download that corresponds to your computer. Then, AFTER installing R, visit here to download Rstudio desktop for your computer https://posit.co/download/rstudio-desktop/.  Make sure to install R BEFORE installing R studio.  
+# To start off, if this is the first time you're using R (or if you need a new version), visit here https://cran.rstudio.com/ and choose the download that corresponds to your computer. Then, AFTER installing R, visit here to download Rstudio desktop for your computer https://posit.co/download/rstudio-desktop/.  
 
-# You need at least 4.3.3. version of R. Check this by entering:
+# Make sure to install R BEFORE installing R studio.  
+
+# You will need at least version 4.3.3 of R. You can check this by entering:
 
 R.version
 
@@ -37,6 +39,8 @@ BiocManager::install("phytools");
 BiocManager::install("picante")
 BiocManager::install("imager")
 
+# The next block are the library() commands which will 9 the packages you need to complete this assignment. 
+
 library(ape); 
 library(DECIPHER);
 library(phangorn);
@@ -47,8 +51,7 @@ library(phytools);
 library(picante);
 library(imager);
 
-
-# This next block of code is going to plot a map of the deep-sea vent sampling sites where your deep-sea vent taxa were collected. In this case, for two species of copepod collected at two basins. 
+# This next block of code is going to plot a map of the deep-sea vent sampling sites where your deep-sea vent taxa were collected. In this case, for two species of copepod collected at two basins in the Western Pacific. 
 
 map<-load.image("3700 genetic sampling sites.jpg")
 plot(map,axes=FALSE, main = "Deep-sea vents where copepods were sampled")
@@ -94,17 +97,17 @@ write.dna(DNA.no_trans.1, file = 'dispersal_sequences_aligned.fasta', format = '
 
 # This block will make a Maximum Likelihood (ML) tree called "phy_ml"
 
-grass.align <- read.dna('dispersal_sequences_aligned.fasta', format = 'fasta')
+dispersal.align <- read.dna('dispersal_sequences_aligned.fasta', format = 'fasta')
 
-grass.phy <- phyDat(grass.align)
+dispersal.phy <- phyDat(dispersal.align)
 
-grass.phy
+dispersal.phy
 
-dist <- dist.ml(grass.align)
+dist <- dist.ml(dispersal.align)
 
 nj.tree <- nj(dist)
 
-fit <- pml(nj.tree, data = grass.phy)
+fit <- pml(nj.tree, data = dispersal.phy)
 
 fit
 
@@ -112,9 +115,9 @@ fitJC <- optim.pml(fit, rearrangement = "NNI")
 
 plot(fitJC$tree, main = "JC, NNI rearrangement")
 
-write.tree(fitJC$tree, file="grass_ml.tre")
+write.tree(fitJC$tree, file="dispersal_ml.tre")
 
-phy_ml = read.tree(file = "grass_ml.tre")
+phy_ml = read.tree(file = "dispersal_ml.tre")
 
 # Your sequences are from two species - this next block will place the root of your phylogeny at the midpoint for "rooted_ml_tree". 
 
@@ -124,7 +127,7 @@ plot(rooted_ml_tree)
 
 # This block makes an Neighbour-Joining tree called 'rooted_tree' based on the pairwise distances between each DNA sequence (in this case, it's Kimura's 2 Parameter distance). 
 
-D <- dist.dna(grass.align, model="K80")
+D <- dist.dna(dispersal.align, model="K80")
 
 D
 
@@ -183,7 +186,7 @@ gheatmap(mltree, genbank_seq_metadata , low = "white",high = "#1099dd",offset=0.
 
 dev.off()
 
-# So - hats off to you!! You've made two kinds of phylogeny from publicly available DNA sequences that were collected from two genera of deep-sea vent copepods. Now, print your pdf, examine the map from the assignment, and prepare to speak for three minutes (**without notes**) about the conclusions you might make regarding the larval dispersal of the two genera based on your phylogeny. Which taxon is likely to possess planktotrophic larvae?  Which taxon is likely to possess lecithotrophic larvae?  Why?  Does the way you made your phylogeny change your prediction? What consequences would mining in the Lau Basin have on species living at and around deep-sea vents? 
+# So - hats off to you!! You've made two kinds of phylogeny from publicly available DNA sequences that were collected from two genera of deep-sea vent copepods. Now, print your pdf, examine the map from the assignment, and prepare to speak for three minutes (!!without notes!!) about the conclusions you might make regarding the larval dispersal of the two genera based on your phylogeny. Which taxon is likely to possess planktotrophic larvae?  Which taxon is likely to possess lecithotrophic larvae?  Why?  Does the way you made your phylogeny change your prediction? What consequences would mining in the Lau Basin have on species living at and around deep-sea vents? 
 
 
 
