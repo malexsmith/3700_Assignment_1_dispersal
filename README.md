@@ -54,12 +54,13 @@ library(imager);
 # This next block of code is going to plot a map of the deep-sea vent sampling sites where your deep-sea vent taxa were collected. In this case, for two species of copepod collected at two basins in the Western Pacific. 
 
 map<-load.image("3700 genetic sampling sites.jpg")
-plot(map,axes=FALSE, main = "Deep-sea vents where copepods were sampled")
+plot(map,axes=FALSE, main = "Deep-sea vents where copepod spp. were sampled")
 
 
 # The next block of code goes to GenBank and downloads the public DNA sequences for your two species of deep-sea vent copepod. These sequences are COI mitochondrial DNA barcodes. You can explore GenBank at https://www.ncbi.nlm.nih.gov/nucleotide/
 
 dispersal_sequences = read.GenBank(c("OQ693582", "OQ693581", "OQ693580", "OQ693579", "OQ693578", "OQ693577", "OQ693576", "OQ693575", "OQ693574", "OQ693573", "OQ693572", "OQ693571", "OQ693570", "OQ693569", "OQ693568", "OQ693567", "OQ693566", "OQ693565", "OQ693564", "OQ693563", "OQ693497", "OQ693478", "OQ693473", "OQ693460", "OQ693458", "OQ693457", "OQ693434", "OQ693415", "OQ693414", "OQ693413", "OQ693104", "OQ693098", "OQ693097", "OQ693096", "OQ693087", "OQ693069", "OQ693054", "OQ693049", "OQ693044", "OQ693042"))
+
 
 
 write.dna(dispersal_sequences, file = 'dispersal_sequences.fasta', format = 'fasta' )
@@ -79,7 +80,7 @@ BrowseSeqs(dna)
 
 DNA.no_trans.1 <- AlignSeqs(dna, gapOpening = c(-20, -10), gapExtension = c(-5, -1))
 
-# Now, you can visualise your alignment as before in a new browser tab. 
+# Now, you can visualise your alignment as before in a new browser tab. Can you spot your two species?
 
 BrowseSeqs(DNA.no_trans.1)
 
@@ -123,6 +124,8 @@ phy_ml = read.tree(file = "dispersal_ml.tre")
 
 rooted_ml_tree <- midpoint.root(phy_ml)
 
+# Plot the newly rooted phylogeny - can you see the two species? (hint - they are monophyletic) 
+
 plot(rooted_ml_tree)
 
 # This block makes an Neighbour-Joining tree called 'rooted_tree' based on the pairwise distances between each DNA sequence (in this case, it's Kimura's 2 Parameter distance). 
@@ -145,13 +148,13 @@ plot(rooted_tree)
 
 # In the next block we're going to plot your tree in a more visually pleasing ggplot fashion rather than base R using the package ggtree. First your nj tree (Note that the tip label is set large here (to 7) for what you need eventually in printing - you can reduce it if you'd like. 
 
-njtree = ggplot(rooted_tree) + geom_tree() + theme_tree()+ geom_treescale()+geom_tiplab(size=7)
+njtree = ggplot(rooted_tree) + geom_tree() + theme_tree()+ geom_treescale(linesize = 0.5, fontsize =7)+geom_tiplab(size=7)
 
 njtree
 
 # then your ml tree
 
-mltree = ggplot(rooted_ml_tree) + geom_tree() + theme_tree()+ geom_treescale()+geom_tiplab(size=7)
+mltree = ggplot(rooted_ml_tree) + geom_tree() + theme_tree()+ geom_treescale(linesize = 0.5, fontsize =7)+geom_tiplab(size=7)
 
 mltree
 
@@ -162,31 +165,31 @@ genbank_seq_metadata <- read.csv(file = "3700 test genbank metadata.csv",head=TR
 
 # The gheatmap command below plots the phylogeny you've created against the site information you've just uploaded. First for the NJ tree.
 
-gheatmap(njtree, genbank_seq_metadata , low = "white",high = "#1099dd",offset=0.03, width=0.15, font.size=3, 
+gheatmap(njtree, genbank_seq_metadata , low = "white",high = "#1099dd",color="grey", offset=0.03, width=0.15, font.size=3, 
          colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal w NJ tree")+ theme(legend.position="none")
 
 # Now, use the same command structure to append the information to the ML tree.
 
-gheatmap(mltree, genbank_seq_metadata , low = "white",high = "#1099dd",offset=0.03, width=0.15, font.size=3, 
+gheatmap(mltree, genbank_seq_metadata , low = "white",high = "#1099dd",color="grey", offset=0.03, width=0.15, font.size=3, 
          colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal w ML tree")+ theme(legend.position="none")
 
 
 # Now that you've made the two phylogenies and appended the site information, you can use the pdf command below to make a single Acrobat file of your phylogenies and the map which you should print and have on hand for your video submission of this assignment. 
 
-pdf("ZOO3700 deep-sea vent sequences with metadata - dispersal assignment - 250623.pdf", width = 18, height = 12) # Open a new pdf file
+pdf("ZOO3700 deep-sea vent sequences with metadata - dispersal assignment - 2506242.pdf", width = 18, height = 12) # Open a new pdf file
 
 plot(map,axes=FALSE, main = "Deep-sea vents where copepods were sampled")
 
-gheatmap(njtree, genbank_seq_metadata , low = "white",high = "#1099dd",offset=0.03, width=0.15, font.size=6, 
+gheatmap(njtree, genbank_seq_metadata , low = "white",high = "#1099dd",color="grey", offset=0.03, width=0.05, font.size=6, 
          colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal w NJ tree")+ theme(legend.position="none")
 
-gheatmap(mltree, genbank_seq_metadata , low = "white",high = "#1099dd",offset=0.03, width=0.15, font.size=6, 
+gheatmap(mltree, genbank_seq_metadata , low = "white",high = "#1099dd",color="grey", offset=0.03, width=0.05, font.size=6, 
          colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal w ML tree")+ theme(legend.position="none")
 
 
 dev.off()
 
-# So - hats off to you!! You've made two kinds of phylogeny from publicly available DNA sequences that were collected from two genera of deep-sea vent copepods. Now, print your pdf, examine the map from the assignment, and prepare to speak for three minutes (!!without notes!!) about the conclusions you might make regarding the larval dispersal of the two genera based on your phylogeny. Which taxon is likely to possess planktotrophic larvae?  Which taxon is likely to possess lecithotrophic larvae?  Why?  Does the way you made your phylogeny change your prediction? What consequences would mining in the Lau Basin have on species living at and around deep-sea vents? 
+# So - hats off to you!! You've made two kinds of phylogeny from publicly available DNA sequences that were collected from two species of deep-sea vent copepods. Now, print your pdf, examine the map from the assignment, and prepare to speak for three minutes (!!without notes!!) about the conclusions you might make regarding the larval dispersal of the two genera based on your phylogeny. Which taxon is likely to possess planktotrophic larvae?  Which taxon is likely to possess lecithotrophic larvae?  Why?  Does the way you made your phylogeny change your prediction? What consequences would mining in the Lau Basin have on species living at and around deep-sea vents? 
 
 
 
