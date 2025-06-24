@@ -148,13 +148,13 @@ plot(rooted_tree)
 
 # In the next block we're going to plot your tree in a more visually pleasing ggplot fashion rather than base R using the package ggtree. First your nj tree (Note that the tip label is set large here (to 7) for what you need eventually in printing - you can reduce it if you'd like. 
 
-njtree = ggplot(rooted_tree) + geom_tree() + theme_tree()+ geom_treescale(linesize = 0.5, fontsize =7)+geom_tiplab(size=7)
+njtree = ggplot(rooted_tree) + geom_tree(linewidth = 1) + theme_tree()+ geom_treescale(linesize = 1, fontsize =7)+geom_tiplab(size=7)
 
 njtree
 
 # then your ml tree
 
-mltree = ggplot(rooted_ml_tree) + geom_tree() + theme_tree()+ geom_treescale(linesize = 0.5, fontsize =7)+geom_tiplab(size=7)
+mltree = ggplot(rooted_ml_tree) + geom_tree(linewidth = 1) + theme_tree()+ geom_treescale(linesize = 1, fontsize =7)+geom_tiplab(size=7)
 
 mltree
 
