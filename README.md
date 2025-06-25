@@ -2,6 +2,8 @@
 
 # These code blocks will help you download public DNA sequences, align them, and create phylogenies to complete Assignment 1. Please note that you should have the most up to date version of R installed along with R studio and that you are connected to the internet throughout. 
 
+# Please note, that this assignment has been written in R using Windows and I reccomend that you complete the assisgnment on a Windows machine.  
+
 # To start off, if this is the first time you're using R (or if you need a new version), visit here https://cran.rstudio.com/ and choose the download that corresponds to your computer. Then, AFTER installing R, visit here to download Rstudio desktop for your computer https://posit.co/download/rstudio-desktop/.  
 
 # Make sure to install R BEFORE installing R studio.  
