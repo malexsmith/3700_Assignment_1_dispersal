@@ -22,12 +22,6 @@ rm(list=ls())
 
 getwd()
 
-# If you want to change the 'wd' - use the optional setwd command below, and replace the ____ between the "_____" with where you'd like to save your material (and then remove the '#')
-
-# setwd("_____")
-
-setwd("C:\\Users\\malex\\Sync\\R")
-
 # This next block of code will install a package called BioManager that we will use to install 9 further packages (if you have not already installed them). If you have already installed them, you can skip to the library() commands below which will open the packages you need to complete this assignment. 
 
 if (!require("BiocManager", quietly = TRUE))
@@ -40,8 +34,8 @@ BiocManager::install("phangorn");
 BiocManager::install("ggtree");
 BiocManager::install("ggplot2");
 BiocManager::install("phytools");
-BiocManager::install("picante")
-BiocManager::install("imager")
+BiocManager::install("picante");
+BiocManager::install("imager");
 
 # The next block are the library() commands which will 9 the packages you need to complete this assignment. 
 
@@ -57,7 +51,8 @@ library(imager);
 
 # This next block of code is going to plot a map of the deep-sea vent sampling sites where your deep-sea vent taxa were collected. In this case, for two species of copepod collected at two basins in the Western Pacific. 
 
-map<-load.image("3700 genetic sampling sites.jpg")
+map<-load.image("3700 genetic sampling sites.jpg");
+
 plot(map,axes=FALSE, main = "Deep-sea vents where copepod spp. were sampled")
 
 
