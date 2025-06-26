@@ -10,7 +10,7 @@
 
 # Once you have both R and R studio installed, you can work from the console the (">") and follow along here by copying the commands from GitHub (the smaller text are the commands to copy, the larger text is me talking to you) to the R console window.  
 
-## But, will be faster for you to download the .R (and .jpg and .csv input files) from GitHub and then open them in Rstudio.  
+# But, will be faster for you to download the .R (and .jpg and .csv input files) from GitHub and then open them in Rstudio.  
 
 # If you already have R installed on your computer, check your version - you will need at least version 4.3.3 of R. You can check what version you have by entering:
 
