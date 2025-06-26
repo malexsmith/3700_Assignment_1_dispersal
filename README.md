@@ -1,6 +1,6 @@
 # ZOO*3700 Assignment 1 : Dispersal among and between deep-sea vents inferred from public mtDNA sequences
 
-# These code blocks will help you download public DNA sequences, align them, and create phylogenies to complete Assignment 1. Please note that you should have the most up to date version of R installed along with R studio and that you are connected to the internet throughout. 
+# Welcome to your first invertebrateR assignment! These code blocks will help you download public DNA sequences, align them, and create phylogenies to complete Assignment 1. Please note that you should have the most up to date version of R installed along with R studio and that you are connected to the internet throughout. 
 
 # Please note, that this assignment has been written in R using Windows and I reccomend that you complete the assisgnment on a Windows machine.  
 
