@@ -16,7 +16,7 @@
 
 R.version
 
-# This assignment is designed to be followed along in steps from start to finish.  Each step creates an output that subsequent steps depend on.  Remember to follow the code blocks in order!
+# Do not simply run the entire code at once here.  This assignment is designed to be followed along in steps (code blocks) from start to finish.  Each step will create an output that subsequent steps depend on.  So remember to follow the code blocks in order and run them one at a time!
 
 # This first block of code will clear your working environment in case you've been using R for something else in the past.
 
@@ -27,6 +27,8 @@ rm(list=ls())
 getwd()
 
 # This next block of code will install a package called BioManager that we will use to install 9 further packages (if you have not already installed them). If you have already installed them, you can skip to the library() commands below which will open the packages you need to complete this assignment. 
+
+# Note - that if you have previously installed any of these R packages, you can likely skip ahead to the library() commands below.  If you proceed with the install commands you might be asked whether to update all, some or none ('a' 's' 'n') each time to move forward with the code.
 
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager");
