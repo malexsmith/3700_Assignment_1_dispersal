@@ -210,7 +210,7 @@ dev.off()
 # Which taxon is likely to possess lecithotrophic larvae?  Why? 
 #  
 # Does the way you made your phylogeny change your prediction? 
-# What consequences would mining in the Lau Basin have on species living at and around deep-sea vents? 
+# If mining companies were to target the Woodlark basin for development, would this have the same effect on all species living at and around deep-sea vents? Why or why not? 
 
 # good luck!
 
