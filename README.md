@@ -166,12 +166,13 @@ mltree
 
 genbank_seq_metadata <- read.csv(file = "3700 test genbank metadata.csv",head=TRUE, sep=",", row.names = 1)
 
-# The gheatmap command below plots the phylogeny you've created against the site information you've just uploaded. First for the NJ tree.
+# The gheatmap command below plots the phylogeny you've created against the site information you've just uploaded. First for the NJ tree. (Make sure to add you name to the title! Find ggtitle and insert your name inbetween the quotes). 
 
 gheatmap(njtree, genbank_seq_metadata , low = "white",high = "#1099dd",color="grey", offset=0.03, width=0.15, font.size=3, 
          colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal w NJ tree")+ theme(legend.position="none")
 
-# Now, use the same command structure to append the information to the ML tree.
+# Now, use the same command structure to append the information to the ML tree.(Make sure to add you name to the title! Find ggtitle and insert your name inbetween the quotes). 
+
 
 gheatmap(mltree, genbank_seq_metadata , low = "white",high = "#1099dd",color="grey", offset=0.03, width=0.15, font.size=3, 
          colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal w ML tree")+ theme(legend.position="none")
