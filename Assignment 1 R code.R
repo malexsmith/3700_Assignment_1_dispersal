@@ -18,7 +18,7 @@
 
 # As you work through this assignment do not run the entire code at once.  This assignment is designed to be followed along in steps (code blocks) from start to finish.  Some are very simple, some are more complicated, but generally, each step will create an output that subsequent steps will depend on. So follow the code blocks in order and run them one at a time!
 
-# Here's the first command block - let's confirm what version of R you downloaded and installed (If you are persevering with the version you alread have R installed on your computer, confirm that you have at least version 4.3.3.
+# Here's the first command block - let's confirm what version of R you downloaded and installed (If you are persevering with the version of R you have already installed, confirm that you have at least version 4.3.3.
 
 R.version
 
