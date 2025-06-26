@@ -4,21 +4,25 @@
 
 # Please note, that this assignment has been written in R using Windows and I reccomend that you complete the assisgnment on a Windows machine.  
 
-# To start off, if this is the first time you're using R (or if you need a new version), visit here https://cran.rstudio.com/ and choose the download that corresponds to your computer. Then, AFTER installing R, visit here to download Rstudio desktop for your computer https://posit.co/download/rstudio-desktop/.  
+# Even if you have used R and RStudio in the past, I suggest that you uninstall that verison and reinstall following the instructions here.  This will help you avoid MANY unnecesssary headaches!
+
+# To start off, you need to downlad R.  So visit here https://cran.rstudio.com/ and choose the download that corresponds to your computer. Make sure to install R BEFORE installing R studio.
+
+# Then, AFTER installing R, visit here https://posit.co/download/rstudio-desktop/ to download Rstudio desktop for your computer.   
 
 # Make sure to install R BEFORE installing R studio.  
 
-# Once you have both R and R studio installed, you can work from the console the (">") and follow along here by copying the commands from GitHub (the smaller text are the commands to copy, the larger text is me talking to you) to the R console window.  
+# Once you have both R and R studio installed, download the three files (.R, .csv and .jpg) from the GitHub repository and put them in your working directory (don't know here that is?  we'll get to that in a second!)
 
-# But, will be faster for you to download the .R (and .jpg and .csv input files) from GitHub and then open them in Rstudio.  
+# Open up the .R extension file from R.Studio.  You can either work from the console window the (">") and follow along here by copying the commands from GitHub (the smaller text are the commands to copy, the larger text is me talking to you) to the R console window, or by selecting the command blocks in the .R window and then pressing "Run". This option will be faster. 
 
-# If you already have R installed on your computer, check your version - you will need at least version 4.3.3 of R. You can check what version you have by entering:
+# As you work through this assignment do not run the entire code at once.  This assignment is designed to be followed along in steps (code blocks) from start to finish.  Some are very simple, some are more complicated, but generally, each step will create an output that subsequent steps will depend on. So follow the code blocks in order and run them one at a time!
+
+# Here's the first command block - let's confirm what version of R you downloaded and installed (If you are persevering with the version you alread have R installed on your computer, confirm that you have at least version 4.3.3.
 
 R.version
 
-# Do not simply run the entire code at once here.  This assignment is designed to be followed along in steps (code blocks) from start to finish.  Each step will create an output that subsequent steps depend on.  So remember to follow the code blocks in order and run them one at a time!
-
-# This first block of code will clear your working environment in case you've been using R for something else in the past.
+# The second block of code will clear your working environment in case you've been using R for something else in the past.
 
 rm(list=ls())
 
@@ -26,12 +30,14 @@ rm(list=ls())
 
 getwd()
 
-# This next block of code will install a package called BioManager that we will use to install 9 further packages (if you have not already installed them). If you have already installed them, you can skip to the library() commands below which will open the packages you need to complete this assignment. 
-
-# Note - that if you have previously installed any of these R packages, you can likely skip ahead to the library() commands below.  If you proceed with the install commands you might be asked whether to update all, some or none ('a' 's' 'n') each time to move forward with the code.
+# This next block of code will install a package called BioManager that we will need to install 9 further packages 
 
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager");
+
+# The next block uses BioManager package to install the 9 separate packages you need to run the assignment (if you have not already installed them). If you have already installed them, you can skip to the library() commands below which will open the packages you need to complete this assignment. 
+
+# Note - that if you have previously installed any of these R packages, you can likely skip ahead to the library() commands below.  If you proceed with the install commands you might be asked whether to update all, some or none ('a' 's' 'n') each time to move forward with the code.
 
 BiocManager::install("bipartite");
 BiocManager::install("ape");
@@ -43,7 +49,7 @@ BiocManager::install("phytools");
 BiocManager::install("picante");
 BiocManager::install("imager");
 
-# The next block are the library() commands which will 9 the packages you need to complete this assignment. 
+# The next block are the library() commands which will open the 9 packages needed to work through this assignment. 
 
 library(ape); 
 library(DECIPHER);
@@ -62,7 +68,7 @@ map<-load.image("3700 genetic sampling sites.jpg");
 plot(map,axes=FALSE, main = "Deep-sea vents where copepod spp. were sampled")
 
 
-# The next block of code goes to GenBank and downloads the public DNA sequences for your two species of deep-sea vent copepod. These sequences are COI mitochondrial DNA barcodes. You can explore GenBank at https://www.ncbi.nlm.nih.gov/nucleotide/
+# The next block of code goes to GenBank and downloads the public DNA sequences for your two species of deep-sea vent copepod. These sequences are COI mitochondrial DNA barcodes. GenBank is a global repository for all DNA sequences and if that's interesting to you, you can explore this fantastic resource further at https://www.ncbi.nlm.nih.gov/nucleotide/
 
 dispersal_sequences = read.GenBank(c("OQ693582", "OQ693581", "OQ693580", "OQ693579", "OQ693578", "OQ693577", "OQ693576", "OQ693575", "OQ693574", "OQ693573", "OQ693572", "OQ693571", "OQ693570", "OQ693569", "OQ693568", "OQ693567", "OQ693566", "OQ693565", "OQ693564", "OQ693563", "OQ693497", "OQ693478", "OQ693473", "OQ693460", "OQ693458", "OQ693457", "OQ693434", "OQ693415", "OQ693414", "OQ693413", "OQ693104", "OQ693098", "OQ693097", "OQ693096", "OQ693087", "OQ693069", "OQ693054", "OQ693049", "OQ693044", "OQ693042"))
 
@@ -71,27 +77,27 @@ dispersal_sequences = read.GenBank(c("OQ693582", "OQ693581", "OQ693580", "OQ6935
 write.dna(dispersal_sequences, file = 'dispersal_sequences.fasta', format = 'fasta' )
 
 
-# Next, you need to align these sequences. Aligning sequences ensures that you are comparing homologous regions with each other so that your phylognies will make appropriate branching relationships based on their similarity.
+# In the next coad block, you will align these sequences. Aligning DNA sequences ensures that you are comparing homologous regions with each other so that your phylognies will make appropriate branching relationships based on their similarity.
 
 fas <- "dispersal_sequences.fasta"
 
 dna <- readDNAStringSet(fas)
 
-# The next command opens a web browser to visualise your un-aligned DNA sequences. See how they look like puzzle pieces you have just dumped on the table?  Aligning will resolve this puzzle.
+# The next code block will open a web browser to visualise your un-aligned DNA sequences. See how they look like puzzle pieces you have just dumped on the table?  Aligning will resolve this puzzle.
 
 BrowseSeqs(dna)
 
-# The code that follows will complete an alignment with gap opening and extending costs set high. This is because your DNA is codes for a protein (ie it has a job) and so gaps would result in your DNA  not making amino acids.
+# The next code block will align your DNA sequences with gap opening and extending costs set high. This is because your DNA is codes for a protein (ie it has a job) and so and actual gaps between nucleotides would result in your DNA not making amino acids.
 
 DNA.no_trans.1 <- AlignSeqs(dna, gapOpening = c(-20, -10), gapExtension = c(-5, -1))
 
-# Now, you can visualise your alignment as before in a new browser tab. Can you spot your two species?
+# Now, you can visualise your alignment as before in a new browser tab. Can you spot your two species in this visualisation?
 
 BrowseSeqs(DNA.no_trans.1)
 
 # Curious what your alignment did? Jump back and forth between the browser tabs of your aligned and unaligned DNA sequences. You can see homologous regions have been placed alongside each other with the use of "-" gaps to slide the sequences forwards or backwards to make sure like is being compared with like. 
 
-# The next code block saves your aligned DNA sequences as a 'fasta' file - standard for dna sequences. If you're curious, use a notepad program to open the fasta file and explore. 
+# The next code block saves your aligned DNA sequences as a 'fasta' file - standard format for dna sequences. If you're curious, use a notepad program to open the fasta file and explore. 
 
 writeXStringSet(DNA.no_trans.1, file="dispersal_sequences_aligned.fasta")
 
@@ -125,11 +131,11 @@ write.tree(fitJC$tree, file="dispersal_ml.tre")
 
 phy_ml = read.tree(file = "dispersal_ml.tre")
 
-# Your sequences are from two species - this next block will place the root of your phylogeny at the midpoint for "rooted_ml_tree". 
+# Your sequences are from two species and this next block will place the root of your phylogeny at the midpoint for "rooted_ml_tree". 
 
 rooted_ml_tree <- midpoint.root(phy_ml)
 
-# Plot the newly rooted phylogeny - can you see the two species? (hint - they are monophyletic) 
+# The next code bloxk will plot the newly rooted phylogeny - can you see the two species? (hint - they are monophyletic) 
 
 plot(rooted_ml_tree)
 
@@ -151,36 +157,36 @@ rooted_tree <- midpoint.root(phy)
 
 plot(rooted_tree)
 
-# In the next block we're going to plot your tree in a more visually pleasing ggplot fashion rather than base R using the package ggtree. First your nj tree (Note that the tip label is set large here (to 7) for what you need eventually in printing - you can reduce it if you'd like using the fontsize parameter below. 
+# In the next block we're going to plot your tree in a more visually pleasing manner rather than base R using the packages ggtree and ggplot. First your NJ tree (Note that the tip label is set large here (to 7) for what you need eventually in printing to pdf - you can reduce it if you'd like using the fontsize parameter below, but return it to seven before you print). 
 
 njtree = ggplot(rooted_tree) + geom_tree(linewidth = 1) + theme_tree()+ geom_treescale(linesize = 1, fontsize =7)+geom_tiplab(size=7)
 
 njtree
 
-# then your ml tree
+# The next code block is do the same for your ML tree
 
 mltree = ggplot(rooted_ml_tree) + geom_tree(linewidth = 1) + theme_tree()+ geom_treescale(linesize = 1, fontsize =7)+geom_tiplab(size=7)
 
 mltree
 
 
-# Congratulations - you have a made phylogenies from publicly available deep-sea vent species!  Now you need to append the metadata about these sequences (what basin were they from). To do this, you need the file 3700 test genbank metadata.csv. This .csv file includes the site information associated with each sample sequence. Remember to make sure that this .csv file is in whatever directory/folder you set as the working directory
+# Congratulations - you have a made phylogenies from publicly available deep-sea vent species!  Now you need to append the metadata about these sequences (what basin on your map were they from). 
+
+# To do this, you need the file 3700 test genbank metadata.csv. This .csv file includes the site information associated with each sample sequence. Remember to make sure that this .csv file is in whatever directory/folder you set as the working directory.  The next code block uploads that .csv into your R environment. 
 
 genbank_seq_metadata <- read.csv(file = "3700 test genbank metadata.csv",head=TRUE, sep=",", row.names = 1)
 
-# The gheatmap command below plots the phylogeny you've created against the site information you've just uploaded. First for the NJ tree. (Make sure to add you name to the title! Find ggtitle and insert your name inbetween the quotes). 
+# The next code block uses the gheatmap command below to plot the phylogeny you've created against the site information you've just uploaded (this is possible because the tip labels of the phylogeny and the header of the column of the .csv file are the same values). First for the NJ tree. (Make sure to add you name to the title! Find ggtitle and insert your name inbetween the quotes). 
 
 gheatmap(njtree, genbank_seq_metadata , low = "white",high = "#1099dd",color="grey", offset=0.03, width=0.15, font.size=3, 
          colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal w NJ tree")+ theme(legend.position="none")
 
-# Now, use the same command structure to append the information to the ML tree.(Make sure to add you name to the title! Find ggtitle and insert your name inbetween the quotes). 
-
+# Now, use the same command structure to append the information to the ML tree. (Again, make sure to add you name to the title! Find ggtitle and insert your name inbetween the quotes). 
 
 gheatmap(mltree, genbank_seq_metadata , low = "white",high = "#1099dd",color="grey", offset=0.03, width=0.15, font.size=3, 
          colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal w ML tree")+ theme(legend.position="none")
 
-
-# Now that you've made the two phylogenies and appended the site information, you can use the pdf command below to make a single Acrobat file of your phylogenies and the map which you should print and have on hand for your video submission of this assignment. 
+# Now that you've made the two phylogenies and appended the site information, the next code block uses the pdf command below to make a single Acrobat file of your map and phylogenies. A printout of this pdf is what you should have on hand as a visual aid for your video submission of this assignment. 
 
 pdf("ZOO3700 deep-sea vent sequences with metadata - dispersal assignment - 2506242.pdf", width = 18, height = 12) # Open a new pdf file
 
@@ -192,14 +198,13 @@ gheatmap(njtree, genbank_seq_metadata , low = "white",high = "#1099dd",color="gr
 gheatmap(mltree, genbank_seq_metadata , low = "white",high = "#1099dd",color="grey", offset=0.03, width=0.05, font.size=6, 
          colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal w ML tree")+ theme(legend.position="none")
 
-
 dev.off()
 
 # So - hats off to you!! You've made two kinds of phylogeny from publicly available DNA sequences that were collected from two species of deep-sea vent copepods. 
 
 # Now, print your pdf (hard copy), examine the map and phylogenies you created in this assignment. 
 
-# The final part of your assignment is to record yourself speaking for three minutes (!!without notes!!) about the conclusions you made regarding the larval dispersal of the two genera based on your phylogeny. 
+# The final part of your assignment is to record yourself using the print out as a visual aid as you speak for three minutes (!!without notes!!) about the conclusions you made regarding the larval dispersal of the two genera based on your phylogeny. 
 #  
 # Which taxon is likely to possess planktotrophic larvae?  Why? 
 # Which taxon is likely to possess lecithotrophic larvae?  Why? 
