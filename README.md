@@ -6,7 +6,7 @@
 
 # Even if you have used R and RStudio in the past, I suggest that you uninstall that verison and reinstall following the instructions here.  This will help you avoid MANY unnecesssary headaches!
 
-# To start off, you need to downlad R.  So visit here https://cran.rstudio.com/ and choose the download that corresponds to your computer. Make sure to install R BEFORE installing R studio.
+# To start off, you need to download R.  So visit here https://cran.rstudio.com/ and choose the download that corresponds to your computer. Make sure to install R BEFORE installing R studio.
 
 # Then, AFTER installing R, visit here https://posit.co/download/rstudio-desktop/ to download Rstudio desktop for your computer.   
 
