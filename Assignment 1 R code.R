@@ -77,7 +77,7 @@ dispersal_sequences = read.GenBank(c("OQ693582", "OQ693581", "OQ693580", "OQ6935
 write.dna(dispersal_sequences, file = 'dispersal_sequences.fasta', format = 'fasta' )
 
 
-# In the next coad block, you will align these sequences. Aligning DNA sequences ensures that you are comparing homologous regions with each other so that your phylognies will make appropriate branching relationships based on their similarity.
+# In the next code block, you will align these sequences. Aligning DNA sequences ensures that you are comparing homologous regions with each other so that your phylognies will make appropriate branching relationships based on their similarity.
 
 fas <- "dispersal_sequences.fasta"
 
@@ -97,7 +97,7 @@ BrowseSeqs(DNA.no_trans.1)
 
 # Curious what your alignment did? Jump back and forth between the browser tabs of your aligned and unaligned DNA sequences. You can see homologous regions have been placed alongside each other with the use of "-" gaps to slide the sequences forwards or backwards to make sure like is being compared with like. 
 
-# The next code block saves your aligned DNA sequences as a 'fasta' file - standard format for dna sequences. If you're curious, use a notepad program to open the fasta file and explore. 
+# The next code block saves your aligned DNA sequences as a 'fasta' file - standard format for dna sequences. If you're curious, use a free program called BioEdit to open the fasta file and explore. https://thalljiscience.github.io/. It's an older program but does a lot and has been a workhorse for years for those that analyse DNA sequences. 
 
 writeXStringSet(DNA.no_trans.1, file="dispersal_sequences_aligned.fasta")
 
@@ -135,11 +135,11 @@ phy_ml = read.tree(file = "dispersal_ml.tre")
 
 rooted_ml_tree <- midpoint.root(phy_ml)
 
-# The next code bloxk will plot the newly rooted phylogeny - can you see the two species? (hint - they are monophyletic) 
+# The next code block will plot the newly rooted phylogeny - can you see the two species? (hint - they are monophyletic) 
 
 plot(rooted_ml_tree)
 
-# This block makes an Neighbour-Joining tree called 'rooted_tree' based on the pairwise distances between each DNA sequence (in this case, it's Kimura's 2 Parameter distance). 
+# This block makes an Neighbour-Joining tree called 'rooted_tree' based on the pairwise distances between each DNA sequence (in this case, it's Kimura's 2 Parameter distance, or K2P). 
 
 D <- dist.dna(dispersal.align, model="K80")
 
