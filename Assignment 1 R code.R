@@ -1,6 +1,6 @@
 # ZOO*3700 Assignment 1 : Dispersal among and between deep-sea vents inferred from public mtDNA sequences
 
-# These code blocks will help you download public DNA sequences, align them, and create phylogenies to complete Assignment 1. Please note that you should have the most up to date version of R installed along with R studio and that you are connected to the internet throughout. 
+# Welcome to your first invertebrateR assignment! These code blocks will help you download public DNA sequences, align them, and create phylogenies to complete Assignment 1. Please note that you should have the most up to date version of R installed along with R studio and that you are connected to the internet throughout. 
 
 # Please note, that this assignment has been written in R using Windows and I reccomend that you complete the assisgnment on a Windows machine.  
 
@@ -8,11 +8,15 @@
 
 # Make sure to install R BEFORE installing R studio.  
 
+# Once you have both R and R studio installed, you can work from the console the (">") and follow along here by copying the commands from GitHub (the smaller text are the commands to copy, the larger text is me talking to you) to the R console window.  
+
+## But, will be faster for you to download the .R (and .jpg and .csv input files) from GitHub and then open them in Rstudio.  
+
 # If you already have R installed on your computer, check your version - you will need at least version 4.3.3 of R. You can check what version you have by entering:
 
 R.version
 
-# This assignment is designed to be followed along in steps from start to finish.  Each step creates an output that subsequent steps depend on.  Remember to follow the code blocks in order!
+# Do not simply run the entire code at once here.  This assignment is designed to be followed along in steps (code blocks) from start to finish.  Each step will create an output that subsequent steps depend on.  So remember to follow the code blocks in order and run them one at a time!
 
 # This first block of code will clear your working environment in case you've been using R for something else in the past.
 
@@ -23,6 +27,8 @@ rm(list=ls())
 getwd()
 
 # This next block of code will install a package called BioManager that we will use to install 9 further packages (if you have not already installed them). If you have already installed them, you can skip to the library() commands below which will open the packages you need to complete this assignment. 
+
+# Note - that if you have previously installed any of these R packages, you can likely skip ahead to the library() commands below.  If you proceed with the install commands you might be asked whether to update all, some or none ('a' 's' 'n') each time to move forward with the code.
 
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager");
@@ -139,13 +145,13 @@ phy <- nj(D)
 
 class(phy)
 
-# As before, since your sequences are from two species - this code block will root  your phylogeny at the midpoint. 
+# As before, since your sequences are from two species - this code block will root your phylogeny at the midpoint. 
 
 rooted_tree <- midpoint.root(phy)
 
 plot(rooted_tree)
 
-# In the next block we're going to plot your tree in a more visually pleasing ggplot fashion rather than base R using the package ggtree. First your nj tree (Note that the tip label is set large here (to 7) for what you need eventually in printing - you can reduce it if you'd like. 
+# In the next block we're going to plot your tree in a more visually pleasing ggplot fashion rather than base R using the package ggtree. First your nj tree (Note that the tip label is set large here (to 7) for what you need eventually in printing - you can reduce it if you'd like using the fontsize parameter below. 
 
 njtree = ggplot(rooted_tree) + geom_tree(linewidth = 1) + theme_tree()+ geom_treescale(linesize = 1, fontsize =7)+geom_tiplab(size=7)
 
@@ -162,12 +168,13 @@ mltree
 
 genbank_seq_metadata <- read.csv(file = "3700 test genbank metadata.csv",head=TRUE, sep=",", row.names = 1)
 
-# The gheatmap command below plots the phylogeny you've created against the site information you've just uploaded. First for the NJ tree.
+# The gheatmap command below plots the phylogeny you've created against the site information you've just uploaded. First for the NJ tree. (Make sure to add you name to the title! Find ggtitle and insert your name inbetween the quotes). 
 
 gheatmap(njtree, genbank_seq_metadata , low = "white",high = "#1099dd",color="grey", offset=0.03, width=0.15, font.size=3, 
          colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal w NJ tree")+ theme(legend.position="none")
 
-# Now, use the same command structure to append the information to the ML tree.
+# Now, use the same command structure to append the information to the ML tree.(Make sure to add you name to the title! Find ggtitle and insert your name inbetween the quotes). 
+
 
 gheatmap(mltree, genbank_seq_metadata , low = "white",high = "#1099dd",color="grey", offset=0.03, width=0.15, font.size=3, 
          colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal w ML tree")+ theme(legend.position="none")
@@ -188,7 +195,11 @@ gheatmap(mltree, genbank_seq_metadata , low = "white",high = "#1099dd",color="gr
 
 dev.off()
 
-# So - hats off to you!! You've made two kinds of phylogeny from publicly available DNA sequences that were collected from two species of deep-sea vent copepods. Now, print your pdf, examine the map from the assignment, and prepare to speak for three minutes (!!without notes!!) about the conclusions you might make regarding the larval dispersal of the two genera based on your phylogeny. 
+# So - hats off to you!! You've made two kinds of phylogeny from publicly available DNA sequences that were collected from two species of deep-sea vent copepods. 
+
+# Now, print your pdf (hard copy), examine the map and phylogenies you created in this assignment. 
+
+# The final part of your assignment is to record yourself speaking for three minutes (!!without notes!!) about the conclusions you made regarding the larval dispersal of the two genera based on your phylogeny. 
 #  
 # Which taxon is likely to possess planktotrophic larvae?  Why? 
 # Which taxon is likely to possess lecithotrophic larvae?  Why? 

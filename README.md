@@ -145,13 +145,13 @@ phy <- nj(D)
 
 class(phy)
 
-# As before, since your sequences are from two species - this code block will root  your phylogeny at the midpoint. 
+# As before, since your sequences are from two species - this code block will root your phylogeny at the midpoint. 
 
 rooted_tree <- midpoint.root(phy)
 
 plot(rooted_tree)
 
-# In the next block we're going to plot your tree in a more visually pleasing ggplot fashion rather than base R using the package ggtree. First your nj tree (Note that the tip label is set large here (to 7) for what you need eventually in printing - you can reduce it if you'd like. 
+# In the next block we're going to plot your tree in a more visually pleasing ggplot fashion rather than base R using the package ggtree. First your nj tree (Note that the tip label is set large here (to 7) for what you need eventually in printing - you can reduce it if you'd like using the fontsize parameter below. 
 
 njtree = ggplot(rooted_tree) + geom_tree(linewidth = 1) + theme_tree()+ geom_treescale(linesize = 1, fontsize =7)+geom_tiplab(size=7)
 
@@ -195,7 +195,11 @@ gheatmap(mltree, genbank_seq_metadata , low = "white",high = "#1099dd",color="gr
 
 dev.off()
 
-# So - hats off to you!! You've made two kinds of phylogeny from publicly available DNA sequences that were collected from two species of deep-sea vent copepods. Now, print your pdf, examine the map from the assignment, and prepare to speak for three minutes (!!without notes!!) about the conclusions you might make regarding the larval dispersal of the two genera based on your phylogeny. 
+# So - hats off to you!! You've made two kinds of phylogeny from publicly available DNA sequences that were collected from two species of deep-sea vent copepods. 
+
+# Now, print your pdf (hard copy), examine the map and phylogenies you created in this assignment. 
+
+# The final part of your assignment is to record yourself speaking for three minutes (!!without notes!!) about the conclusions you made regarding the larval dispersal of the two genera based on your phylogeny. 
 #  
 # Which taxon is likely to possess planktotrophic larvae?  Why? 
 # Which taxon is likely to possess lecithotrophic larvae?  Why? 
