@@ -35,11 +35,10 @@ getwd()
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager");
 
-# The next block uses BioManager package to install the 9 separate packages you need to run the assignment (if you have not already installed them). If you have already installed them, you can skip to the library() commands below which will open the packages you need to complete this assignment. 
+# The next block uses BioManager package to install the 8 separate packages you need to run the assignment (if you have not already installed them). If you have already installed them, you can skip to the library() commands below which will open the packages you need to complete this assignment. 
 
 # Note - that if you have previously installed any of these R packages, you can likely skip ahead to the library() commands below.  If you proceed with the install commands you might be asked whether to update all, some or none ('a' 's' 'n') each time to move forward with the code.
 
-BiocManager::install("bipartite");
 BiocManager::install("ape");
 BiocManager::install("DECIPHER");
 BiocManager::install("phangorn");
@@ -49,12 +48,11 @@ BiocManager::install("phytools");
 BiocManager::install("picante");
 BiocManager::install("imager");
 
-# The next block are the library() commands which will open the 9 packages needed to work through this assignment. 
+# The next block are the library() commands which will open the 8 packages needed to work through this assignment. 
 
 library(ape); 
 library(DECIPHER);
 library(phangorn);
-library(bipartite);
 library(ggtree);
 library(ggplot2);
 library(phytools);
