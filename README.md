@@ -155,7 +155,7 @@ rooted_tree <- midpoint.root(phy)
 
 plot(rooted_tree)
 
-# In the next block we're going to plot your tree in a more visually pleasing manner rather than base R using the packages ggtree and ggplot. First your NJ tree (Note that the tip label is set large here (to 7) for what you need eventually in printing to pdf - you can reduce it if you'd like using the fontsize parameter below, but return it to seven before you print). 
+# In the next block we're going to plot your tree in a more visually pleasing manner rather than base R using the packages ggtree and ggplot. First your NJ tree (Note that the tip label is set large here (to 7) for what you need eventually in printing to pdf - you can reduce it if you'd like using the fontsize parameter below - try 3 - but return it to seven before you print). 
 
 njtree = ggplot(rooted_tree) + geom_tree(linewidth = 1) + theme_tree()+ geom_treescale(linesize = 1, fontsize =7)+geom_tiplab(size=7)
 
@@ -179,7 +179,9 @@ genbank_seq_metadata <- read.csv(file = "3700 test genbank metadata.csv",head=TR
 gheatmap(njtree, genbank_seq_metadata , low = "white",high = "#1099dd",color="grey", offset=0.03, width=0.15, font.size=3, 
          colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal w NJ tree")+ theme(legend.position="none")
 
-# Now, use the same command structure to append the information to the ML tree. (Again, make sure to add you name to the title! Find ggtitle and insert your name inbetween the quotes). 
+# Don't worry if the tree and matrix overlap in the plot window - the sizing has been made for the final pdf output.  
+
+# Now, use the same command structure to append the information to the ML tree. (Again, don't worry about overlap and make sure to add you name to the title! Find ggtitle and insert your name inbetween the quotes). 
 
 gheatmap(mltree, genbank_seq_metadata , low = "white",high = "#1099dd",color="grey", offset=0.03, width=0.15, font.size=3, 
          colnames_angle=90, hjust=1)+vexpand(.1, -1)+ ggtitle("Deep Sea Vent Dispersal w ML tree")+ theme(legend.position="none")
