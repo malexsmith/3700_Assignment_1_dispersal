@@ -205,12 +205,14 @@ dev.off()
 # Now, print your pdf (hard copy), examine the map and phylogenies you created in this assignment. 
 
 # The final part of your assignment is to record yourself using the print out as a visual aid as you speak for three minutes (!!without notes!!) about the conclusions you made regarding the larval dispersal of the two genera based on your phylogeny. 
-#  
-# Which taxon is likely to possess planktotrophic larvae?  Why? 
-# Which taxon is likely to possess lecithotrophic larvae?  Why? 
-#  
+
+# Which taxon is likely to possess planktotrophic larvae? Which taxon is likely to possess lecithotrophic larvae? Why?
+
 # Does the way you made your phylogeny change your prediction? 
-# If mining companies were to target the Woodlark basin for development, would this have the same effect on all species living at and around deep-sea vents? Why or why not? 
+
+# Based on your phylogeny, which of the two basins would you estimate is more fragmented/isolated? 
+
+# If mining companies were to target the region for development, would this have the same effect on all species living at and around deep-sea vents? Why or why not? 
 
 # good luck!
 
