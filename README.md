@@ -200,7 +200,7 @@ gheatmap(mltree, genbank_seq_metadata , low = "white",high = "#1099dd",color="gr
 
 dev.off()
 
-# So - hats off to you!! You've made two kinds of phylogeny from publicly available DNA sequences that were collected from two species of deep-sea vent copepods. 
+# So - hats off to you!! You've made two kinds of phylogeny from publicly available DNA sequences that were collected from multiple populations of two species of deep-sea vent copepods. 
 
 # Now, print your pdf (hard copy), examine the map and phylogenies you created in this assignment. 
 
@@ -208,11 +208,11 @@ dev.off()
 
 # Which taxon is likely to possess planktotrophic larvae? Which taxon is likely to possess lecithotrophic larvae? Why?
 
-# Does the way you made your phylogeny change your prediction? 
+# Does the way you made your phylogeny change your prediction? Why or why not? 
 
-# Based on your phylogeny, which of the two basins would you estimate is more fragmented/isolated? 
+# Based on your phylogeny, which of the two basins contains populations that would you estimate to be more fragmented/isolated? Why? Is a metapopulation approach useful here?  
 
-# If mining companies were to target the region for development, would this have the same effect on all species living at and around deep-sea vents? Why or why not? 
+# If mining companies were to target the region for development, would this have the same effect on all species living at and around deep-sea vents in each basin? Why or why not? 
 
 # good luck!
 
