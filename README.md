@@ -43,10 +43,15 @@ BiocManager::install("ape");
 BiocManager::install("DECIPHER");
 BiocManager::install("phangorn");
 BiocManager::install("ggtree");
-BiocManager::install("ggplot2");
+# BiocManager::install("ggplot2");
 BiocManager::install("phytools");
 BiocManager::install("picante");
 BiocManager::install("imager");
+
+# Note 240914 - the most recent ggplot2 has a bug in it.  Please make sure you are using version 3.5.2 The line below will install that for you. 
+
+packageurl <- "https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.5.2.tar.gz"
+install.packages(packageurl, repos=NULL, type="source")
 
 # The next block are the library() commands which will open the 8 packages needed to work through this assignment. 
 
