@@ -43,7 +43,6 @@ BiocManager::install("ape");
 BiocManager::install("DECIPHER");
 BiocManager::install("phangorn");
 BiocManager::install("ggtree");
-# BiocManager::install("ggplot2");
 BiocManager::install("phytools");
 BiocManager::install("picante");
 BiocManager::install("imager");
