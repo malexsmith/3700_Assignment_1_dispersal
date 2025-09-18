@@ -2,7 +2,7 @@
 
 # Welcome to your first invertebrateR assignment! These code blocks will help you download public DNA sequences, align them, and create phylogenies to complete Assignment 1. Please note that you should have the most up to date version of R installed along with R studio and that you are connected to the internet throughout. 
 
-# This assignment has been written in R using Windows and I recommend that you complete the assisgnment on a Windows machine.  
+# This assignment has been written in R using Windows and I recommend that you complete the assignment on a Windows machine.  
 
 # Even if you have used R and RStudio in the past, I suggest that you uninstall that verison and reinstall following the instructions here.  This will help you avoid MANY unnecesssary headaches!
 
@@ -47,7 +47,7 @@ BiocManager::install("phytools");
 BiocManager::install("picante");
 BiocManager::install("imager");
 
-# Note 240914 - the most recent ggplot2 has a bug in it.  Please make sure you are using version 3.5.2 The line below will install that for you. 
+# Note 250914 - the most recent ggplot2 has a bug in it.  Please make sure you are using version 3.5.2 The line below will install that for you. 
 
 packageurl <- "https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.5.2.tar.gz"
 install.packages(packageurl, repos=NULL, type="source")
