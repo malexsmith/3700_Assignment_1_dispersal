@@ -79,7 +79,7 @@ dispersal_sequences = read.GenBank(c("OQ693582", "OQ693581", "OQ693580", "OQ6935
 write.dna(dispersal_sequences, file = 'dispersal_sequences.fasta', format = 'fasta' )
 
 
-# In the next code block, you will align these sequences. Aligning DNA sequences ensures that you are comparing homologous regions with each other so that your phylognies will make appropriate branching relationships based on their similarity.
+# In the next code block, you will align these sequences. Aligning DNA sequences ensures that you are comparing homologous regions with each other so that your phylogenies will make appropriate branching relationships based on their similarity.
 
 fas <- "dispersal_sequences.fasta"
 
