@@ -185,6 +185,8 @@ gheatmap(njtree, genbank_seq_metadata , low = "white",high = "#1099dd",color="gr
 
 # Don't worry if the tree and matrix overlap in the plot window - the sizing has been made for the final pdf output.  
 
+### 250923 - Please note that if you experience errors in 'aesthetics' with this plot - please use the phylo.heatmap command in the .R file titled "Assignment 1 R code_250923.R" to make both NJ and ML trees (and to include in your PDF).    
+
 # Now, use the same command structure to append the information to the ML tree. (Again, don't worry about overlap and make sure to add you name to the title! Find ggtitle and insert your name inbetween the quotes). 
 
 gheatmap(mltree, genbank_seq_metadata , low = "white",high = "#1099dd",color="grey", offset=0.03, width=0.15, font.size=3, 
