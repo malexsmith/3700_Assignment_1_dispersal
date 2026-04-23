@@ -308,6 +308,19 @@ mantel_plot_both = ggplot(long_df, aes(x = Geography, y = Diversity, color = sou
 mantel_plot_both
 
 
+## explanation
+mantel_plot_both_no_colour = ggplot(long_df, aes(x = Geography, y = Diversity, color = source)) +
+  geom_point() +
+  # geom_point(position = position_jitter(width = 20)) +
+  # above applies a 20km jitter to points 
+  geom_smooth(method = "glm") +
+ scale_color_viridis_d(option = "turbo")+
+  theme_minimal() +
+  labs(title = "Distance Decay with Genetic Diversity for two species of hydrothermal copepods",
+       x = "Geographic Distance (km)",
+       y = "Genetic Distance")+
+  theme(legend.position = "none") 
+mantel_plot_both_no_colour
 
 
 # Now that you've made the two phylogenies and appended the site information, the next code block uses the pdf command below to make a single Acrobat file of your map and phylogenies. A printout of this pdf is what you should have on hand as a visual aid for your video submission of this assignment. 
@@ -316,7 +329,7 @@ pdf("ZOO3700 deep-sea vent sequences with metadata - dispersal assignment - 2604
 
 vent_map
 colored_tree_heatmap
-mantel_plot_both
+mantel_plot_both_no_colour
 
 dev.off()
 
