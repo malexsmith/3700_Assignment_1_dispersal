@@ -159,6 +159,7 @@ phy_ml = read.tree(file = "dispersal_ml.tre")
 # Your sequences are from two species and this next block will place the root of your phylogeny at the midpoint for "rooted_ml_tree". 
 
 rooted_ml_tree <- midpoint.root(phy_ml)
+plot(rooted_ml_tree)
 
 # In the next block we're going to plot your tree in a more visually pleasing manner rather than base R using the packages ggtree and ggplot. First your NJ tree (Note that the tip label is set large here (to 7) for what you need eventually in printing to pdf - you can reduce it if you'd like using the fontsize parameter below - try 3 - but return it to seven before you print). 
 
@@ -339,11 +340,11 @@ dev.off()
 
 # The final part of your assignment is to record yourself using the print out as a visual aid as you speak for three minutes (!!without notes!!) about the conclusions you made regarding the larval dispersal of the two genera based on your phylogeny. 
 
-# Which taxon is likely to possess planktotrophic larvae? Which taxon is likely to possess lecithotrophic larvae? Why?
+# Using your phylogeny and the IBD plot, explain which taxon likely possesses planktotrophic larvae and which taxon is likely to possess lecithotrophic larvae? Why?
 
-# ################# Which species is which in the IBD and phylogeny?
+# Is there evidence of IBD or fragmentation within a basin? 
 
-# Based on your phylogeny, which of the basins would you estimate is more fragmented/isolated? 
+# Based on your phylogeny and your IBD plot, which of the basins would you estimate is more fragmented/isolated? 
 
 # If mining companies were to target the region for development, would this have the same effect on all species living at and around deep-sea vents? Why or why not? 
 
