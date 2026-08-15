@@ -101,7 +101,6 @@ dispersal_sequences = read.GenBank(dispersal_sequences1)
 
 write.dna(dispersal_sequences, file = 'dispersal_sequences.fasta', format = 'fasta' )
 
-
 # In the next code block, you will align these sequences. Aligning DNA sequences ensures that you are comparing homologous regions with each other so that your phylognies will make appropriate branching relationships based on their similarity.
 
 fas <- "dispersal_sequences.fasta"
@@ -181,14 +180,7 @@ matrix
 
 p <- ggtree(rooted_ml_tree)
 
-# EXPLANATION 
-
-colored_tree = p %<+% map_sites + 
-  geom_tiplab(aes(color = sp), size = 2) + 
-  scale_color_viridis_d(option = "viridis")+
-  geom_treescale(x=0, y=25, fontsize=4, linesize=1)+# Color by column
-  theme(legend.position = "null")
-colored_tree
+# Now we will plot this tree with two colours of dots for each species 
 
 p_colored <- p %<+% map_sites +
   geom_tippoint(aes(color = sp), size = 2) +
@@ -199,19 +191,20 @@ p_colored
 
 # Don't worry if the tree and matrix overlap in the plot window - the sizing has been made for the final pdf output.  
 
-## 
+# Combine your tree with your site matrix for each basin
+
 colored_tree_heatmap = gheatmap(p_colored, matrix , low = "white",high = "#1099dd",color="grey",offset=0.0015, width=0.1, font.size=2.5, 
                                 colnames_angle=45, hjust=1)+vexpand(.1, -1)+ theme(legend.position="none")
 colored_tree_heatmap
 
 
 #Now it's time to consider how genetic variation is related to geographic distance
-# Isolation by distance (or IBD> 
+# Isolation by distance (or IBD)
 
 # these are intra-specific calculations - so first you must break your dataset into two
 
 
-# Let's first calculate species A genetic distances
+# First, lets calculate species A genetic distances
 
 target_id_a1 <- map_sites[map_sites$sp == "A", ]
 target_id_a = target_id_a1$accession
@@ -252,33 +245,29 @@ mantel_plot_a = ggplot(plot_data_a, aes(x = Geography, y = Diversity)) +
        y = "Genetic Diversity")
 mantel_plot_a
 
-# 3. species A genetic distances
-# Names in FASTA object are usually in names(sequences)
+# Now we will compile the same data for species B
+
 target_id_b1 <- map_sites[map_sites$sp == "B", ]
 target_id_b = target_id_b1$accession
 subset_dna_b <- dispersal.align[target_id_b, ]
 dist_b <- dist.ml(subset_dna_b)
 
 sites_b <- st_as_sf(target_id_b1, coords = c("lon", "lat"), crs = 4326)
-# Calculate the pairwise distance matrix (result in meters by default for WGS84)
 distance_matrix_b <- st_distance(sites_b, sites_b)
 
-# You can set units explicitly if needed, e.g., for kilometers:
 distance_matrix_km_b <- units::set_units(st_distance(sites_b, sites_b), "km")
 distance_matrix_km_b <- as.dist(distance_matrix_km_b)
 
-# mantel test in vegan
+# mantel test in vegan for species B
 mantel_res_b <- mantel(dist_b, distance_matrix_km_b, method = "spearman", permutations = 999)
 print(mantel_res_b)
 
-# Combine distances into a data frame
 plot_data_b <- data.frame(
   Geography = as.vector(distance_matrix_km_b),
   Diversity = as.vector(dist_b)
 )
 
-# Plot
-options(scipen = 999) # Set a high penalty to avoid scientific notation
+options(scipen = 999) 
 
 mantel_plot_b = ggplot(plot_data_b, aes(x = Geography, y = Diversity)) +
   geom_point() +
@@ -292,9 +281,13 @@ mantel_plot_b = ggplot(plot_data_b, aes(x = Geography, y = Diversity)) +
 mantel_plot_b
 
 
-# plot together
+# You now need to put the two species data sets together to plot them. 
+
 library(dplyr)
 long_df <- bind_rows(list("Species B" = plot_data_b, "Species A" = plot_data_a), .id = "source")
+
+# Now, plot set of pairwise distances (genetic and geographic) to visualise whether
+# genetic differentiation correlates with the geographic distance among sites.
 
 mantel_plot_both = ggplot(long_df, aes(x = Geography, y = Diversity, color = source)) +
   geom_point() +
@@ -309,7 +302,7 @@ mantel_plot_both = ggplot(long_df, aes(x = Geography, y = Diversity, color = sou
 mantel_plot_both
 
 
-## explanation
+## remove?
 mantel_plot_both_no_colour = ggplot(long_df, aes(x = Geography, y = Diversity, color = source)) +
   geom_point() +
   # geom_point(position = position_jitter(width = 20)) +
@@ -330,7 +323,7 @@ pdf("ZOO3700 deep-sea vent sequences with metadata - dispersal assignment - 2604
 
 vent_map
 colored_tree_heatmap
-mantel_plot_both_no_colour
+mantel_plot_both
 
 dev.off()
 
