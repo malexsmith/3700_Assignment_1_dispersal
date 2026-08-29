@@ -31,12 +31,12 @@ rm(list=ls())
 getwd()
 setwd("C://Users//malex//Documents//3700_Assignment_1_dispersal")
 
-# This next block of code will install a package called BioManager that we will need to install 9 further packages 
+# This next block of code will install a package called BioManager that we will need to install 12 further packages 
 
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager");
 
-# The next block uses BioManager package to install the 7 separate packages you need to run the assignment (if you have not already installed them). If you have already installed them, you can skip to the library() commands below which will open the packages you need to complete this assignment. 
+# The next block uses BioManager package to install the 12 separate packages you need to run the assignment (if you have not already installed them). If you have already installed them, you can skip to the library() commands below which will open the packages you need to complete this assignment. 
 
 # Note - that if you have previously installed any of these R packages, you can likely skip ahead to the library() commands below.  If you proceed with the install commands you might be asked whether to update all, some or none ('a' 's' 'n') each time to move forward with the code.
 
@@ -44,17 +44,18 @@ BiocManager::install("ape");
 BiocManager::install("Biostrings");
 BiocManager::install("DECIPHER");
 BiocManager::install("phangorn");
-
 BiocManager::install("ggtree");
 BiocManager::install("phytools");
 BiocManager::install("ggplot2");
 BiocManager::install("sf");
 BiocManager::install("rnaturalearth");
+BiocManager::install("rnaturalearthdata");
 BiocManager::install("ggspatial");
 BiocManager::install("vegan");
 BiocManager::install("cowplot");
+BiocManager::install("dplyr");
 
-# The next block are the library() commands which will open the 8 packages needed to work through this assignment. 
+# The next block are the library() commands which will open the 12 packages needed to work through this assignment. 
 
 library(ape); 
 library(Biostrings)
@@ -65,9 +66,11 @@ library(ggplot2);
 library(phytools);
 library(sf)
 library(rnaturalearth)
+library(rnaturalearthdata)
 library(ggspatial)
 library(vegan)
 library(cowplot)
+library(dplyr)
 
 # This next block of code is going to plot a map of the deep-sea vent sampling sites where your deep-sea vent taxa were collected. In this case, for two species of copepod collected at two basins in the Western Pacific. 
 
@@ -84,7 +87,7 @@ vent_map = ggplot(data = world) +
   geom_sf(fill = "antiquewhite", color = "gray50") +
   # Plot points
   geom_sf(data = sites_sf, aes(color = basin), size = 3) +
-  annotation_scale(location = "bl", width_hint = 0.25) +
+    annotation_scale(location = "bl", width_hint = 0.25) +
   coord_sf(xlim = c(100, 190), ylim = c(-40, 10), expand = FALSE) +
   theme_minimal() +
   labs(title = "Deep-sea hydrothermal vents where copepods were sampled",
@@ -201,8 +204,7 @@ colored_tree_heatmap
 #Now it's time to consider how genetic variation is related to geographic distance
 # Isolation by distance (or IBD)
 
-# these are intra-specific calculations - so first you must break your dataset into two
-
+# Since these are within species calculations (intra-specific ) - first you must break your dataset into two
 
 # First, lets calculate species A genetic distances
 
@@ -225,6 +227,8 @@ distance_matrix_km_a <- as.dist(distance_matrix_km_a)
 
 mantel_res_a <- mantel(dist_a, distance_matrix_km_a, method = "spearman", permutations = 999)
 print(mantel_res_a)
+# is there significant isolation by distance within this species?
+
 
 # Combine distances into a single data frame so you can plot them
 plot_data_a <- data.frame(
@@ -261,6 +265,7 @@ distance_matrix_km_b <- as.dist(distance_matrix_km_b)
 # mantel test in vegan for species B
 mantel_res_b <- mantel(dist_b, distance_matrix_km_b, method = "spearman", permutations = 999)
 print(mantel_res_b)
+# is there significant isolation by distance within this species?
 
 plot_data_b <- data.frame(
   Geography = as.vector(distance_matrix_km_b),
@@ -281,9 +286,8 @@ mantel_plot_b = ggplot(plot_data_b, aes(x = Geography, y = Diversity)) +
 mantel_plot_b
 
 
-# You now need to put the two species data sets together to plot them. 
+# You now need to put the two species data sets together to plot them. This will use the library dplyr.
 
-library(dplyr)
 long_df <- bind_rows(list("Species B" = plot_data_b, "Species A" = plot_data_a), .id = "source")
 
 # Now, plot set of pairwise distances (genetic and geographic) to visualise whether
@@ -301,22 +305,6 @@ mantel_plot_both = ggplot(long_df, aes(x = Geography, y = Diversity, color = sou
        y = "Genetic Distance")
 mantel_plot_both
 
-
-## remove?
-mantel_plot_both_no_colour = ggplot(long_df, aes(x = Geography, y = Diversity, color = source)) +
-  geom_point() +
-  # geom_point(position = position_jitter(width = 20)) +
-  # above applies a 20km jitter to points 
-  geom_smooth(method = "glm") +
- scale_color_viridis_d(option = "turbo")+
-  theme_minimal() +
-  labs(title = "Distance Decay with Genetic Diversity for two species of hydrothermal copepods",
-       x = "Geographic Distance (km)",
-       y = "Genetic Distance")+
-  theme(legend.position = "none") 
-mantel_plot_both_no_colour
-
-
 # Now that you've made the two phylogenies and appended the site information, the next code block uses the pdf command below to make a single Acrobat file of your map and phylogenies. A printout of this pdf is what you should have on hand as a visual aid for your video submission of this assignment. 
 
 pdf("ZOO3700 deep-sea vent sequences with metadata - dispersal assignment - 260423.pdf", width = 10, height = 6) # Open a new pdf file
@@ -329,13 +317,13 @@ dev.off()
 
 # So - hats off to you!! You've made a map and a phylogeny and plotted isolation by distance from publicly available DNA sequences that were collected from two species of deep-sea vent copepods. 
 
-# Now, print your pdf (hard copy), examine the map, the phylogeny and the plot you created in this assignment. 
+# Now, print your pdf (your hard copy), reflect on the map, the phylogeny and the IBD plot you created in this assignment. 
 
-# The final part of your assignment is to record yourself using the print out as a visual aid as you speak for three minutes (!!without notes!!) about the conclusions you made regarding the larval dispersal of the two genera based on your phylogeny. 
+# The final part of your assignment is to record yourself (using the print out as a visual aid) as you speak for three minutes (!!without notes!!) about the conclusions you made regarding the larval dispersal of the two species based on your analysis. 
 
 # Using your phylogeny and the IBD plot, explain which taxon likely possesses planktotrophic larvae and which taxon is likely to possess lecithotrophic larvae? Why?
 
-# Is there evidence of IBD or fragmentation within a basin? 
+# Is there evidence of IBD or fragmentation within a basin?  Explain.
 
 # Based on your phylogeny and your IBD plot, which of the basins would you estimate is more fragmented/isolated? 
 
