@@ -172,7 +172,8 @@ mltree
 # Congratulations - you have constructed a ML phylogeny from publicly available deep-sea vent species!  
 # Now you need to append the metadata about these sequences (what basin on your map were they from). 
 
-# To do this, you need the file 3700 test genbank metadata.csv. This .csv file includes the site information associated with each sample sequence. Remember to make sure that this .csv file is in whatever directory/folder you set as the working directory.  The next code block uploads that .csv into your R environment. 
+# To do this, you need to refer back to the first .csv you accessed (map_sites). This .csv file includes the site information associated with each sample sequence. Remember to make sure that this .csv file is in whatever directory/folder you set as the working directory.  
+# The next code block creates a matrix of sample accessions and basins these samples came from. 
 
 matrix = with(map_sites, table(map_sites$accession, map_sites$basin))
 
