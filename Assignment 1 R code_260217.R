@@ -338,7 +338,7 @@ dev.off()
 
 # So - hats off to you!! You've made a map and a phylogeny and plotted isolation by distance from publicly available DNA sequences that were collected from two species of deep-sea vent copepods. 
 
-# Now, print your pdf (your hard copy), reflect on the map, the phylogeny and the IBD plot you created in this assignment. 
+# Now, print your pdf (your hard copy), reflect on the map, the phylogeny and the IBD plot you created in this assignment.
 
 # The final part of your assignment is to record yourself (using the print out as a visual aid) as you speak for three minutes (!!without notes!!) about the conclusions you made regarding the larval dispersal of the two species based on your analysis. 
 
@@ -346,7 +346,7 @@ dev.off()
 
 # Q2 - Is there evidence of IBD or fragmentation within a basin?  Explain.
 
-# Q3 - Based on your phylogeny and your IBD plot, which of the basins would you estimate is more fragmented/isolated? 
+# Q3 - Based on your phylogeny and your IBD plot, which of the basins would you estimate is more isolated? Is a metapopulation approach useful for these species?
 
 # Q4 - If mining companies were to target the region for development, would this have the same effect on all species living at and around deep-sea vents? Why or why not? 
 
