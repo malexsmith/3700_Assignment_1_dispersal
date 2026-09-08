@@ -1,4 +1,4 @@
-# ZOO*3700 Assignment 1 : Dispersal among and between deep-sea hydrothermal vents inferred from public mtDNA sequences
+# ZOO*3700 Assignment 1 : Dispersal among and between deep-sea hydrothermal vents inferred from public mtDNA sequences.
 
 # Welcome to your first Invert-R assignment! These code blocks will help you map collection localities, download, and align, public DNA sequences, and create phylogenies and analyses of isolation by distance (IBD) to complete Assignment 1. Please note that you should have the most up to date version of R installed along with R studio and that you are connected to the internet throughout. 
 
