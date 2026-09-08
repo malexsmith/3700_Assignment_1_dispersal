@@ -346,7 +346,7 @@ dev.off()
 
 # Q2 - Is there evidence of IBD or fragmentation within a basin?  Explain.
 
-# Q3 - Based on your phylogeny and your IBD plot, which of the basins would you estimate is more fragmented/isolated? 
+# Q3 - Based on your phylogeny and your IBD plot, which of the basins would you estimate is more isolated? Is a metapopulation approach useful for these species?
 
 # Q4 - If mining companies were to target the region for development, would this have the same effect on all species living at and around deep-sea vents? Why or why not? 
 
