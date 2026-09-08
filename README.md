@@ -1,6 +1,6 @@
-# ZOO*3700 Assignment 1 : Dispersal among and between deep-sea hydrothermal vents inferred from public mtDNA sequences
+# ZOO*3700 Assignment 1 : Dispersal among and between deep-sea hydrothermal vents inferred from public mtDNA sequences.
 
-# Welcome to your first Invert-R assignment! These code blocks will help you map collection localities, download, and align, public DNA sequences, and create phylogenies to complete Assignment 1. Please note that you should have the most up to date version of R installed along with R studio and that you are connected to the internet throughout. 
+# Welcome to your first Invert-R assignment! These code blocks will help you map collection localities, download, and align, public DNA sequences, and create phylogenies and analyses of isolation by distance (IBD) to complete Assignment 1. Please note that you should have the most up to date version of R installed along with R studio and that you are connected to the internet throughout. 
 
 # This assignment has been written in R using Windows and I recommend that you complete the assignment on a Windows machine.  
 
@@ -18,7 +18,7 @@
 
 # As you work through this assignment do not run the entire code at once.  This assignment is designed to be followed along in steps (code blocks) from start to finish.  Some are very simple, some are more complicated, but generally, each step will create an output that subsequent steps will depend on. So follow the code blocks in order and run them one at a time!
 
-# Here's the first command block - let's confirm what version of R you downloaded and installed (If you are persevering with the version of R you have already installed, confirm that you have at least version 4.3.3.
+# Here's the first command block - let's confirm what version of R you downloaded and installed (If you are persevering with the version of R you have already installed, confirm that you have at least version 4.6.1.
 
 R.version
 
@@ -29,7 +29,9 @@ rm(list=ls())
 # The next block of code will tell you where your working directory is (i.e. any figures you generate you can find in that folder).  The 'wd' is also where to put your input files.
 
 getwd()
-setwd("C://Users//malex//Documents//3700_Assignment_1_dispersal")
+
+# replace the underscores below to set your own wd location
+# setwd("___")
 
 # This next block of code will install a package called BioManager that we will need to install 12 further packages 
 
@@ -82,7 +84,21 @@ sites_sf <- st_as_sf(map_sites, coords = c("lon", "lat"), crs = 4326)
 # Load Map Data
 world <- ne_countries(scale = "medium", returnclass = "sf")
 
-# Create the Map
+# Forst, a global Map
+vent_map_1 = ggplot(data = world) +
+  geom_sf(fill = "antiquewhite", color = "gray50") +
+  # Plot points
+  geom_sf(data = sites_sf, aes(color = basin), size = 3) +
+  annotation_scale(location = "bl", width_hint = 0.25) +
+  theme_minimal() +
+  labs(title = "Deep-sea hydrothermal vents where copepods were sampled",
+       x = "Longitude", y = "Latitude") +
+  theme(panel.background = element_rect(fill = "aliceblue"))
+vent_map_1
+
+# Now, create your map that is more closely focussed on the basins in question. Please add your own name into the title.  
+
+
 vent_map = ggplot(data = world) +
   geom_sf(fill = "antiquewhite", color = "gray50") +
   # Plot points
@@ -95,6 +111,7 @@ vent_map = ggplot(data = world) +
   theme(panel.background = element_rect(fill = "aliceblue"))
 vent_map
 
+# Now, you're going to go download and analyse public DNA sequences from two copepod species sampled at these locations. 
 
 # The next block of code goes to GenBank and downloads the public DNA sequences for your two species of deep-sea vent copepod. These sequences are COI mitochondrial DNA barcodes. GenBank is a global repository for all DNA sequences and if that's interesting to you, you can explore this fantastic resource further at https://www.ncbi.nlm.nih.gov/nucleotide/
 
@@ -132,9 +149,9 @@ dispersal_sequences_align <- read.dna("dispersal_sequences_aligned.fasta", forma
 
 write.dna(DNA.no_trans.1, file = 'dispersal_sequences_aligned.fasta', format = 'fasta' )
 
-# Now that you've added sequences and aligned them it's time to make a phylogeny with your aligned sequences. There are many ways to make a phylogeny - we're going to try 2, ML and NJ. 
+# Now that you've added sequences and aligned them it's time to make a phylogeny with your aligned sequences. There are many ways to make a phylogeny - we're use Maximum Likelihood (ML) 
 
-# This block will make a Maximum Likelihood (ML) tree called "phy_ml"
+# This block will make an ML tree called "phy_ml"
 
 dispersal.align <- read.dna('dispersal_sequences_aligned.fasta', format = 'fasta')
 
@@ -152,18 +169,18 @@ fit
 
 fitJC <- optim.pml(fit, rearrangement = "NNI")
 
-plot(fitJC$tree, main = "JC, NNI rearrangement")
-
 write.tree(fitJC$tree, file="dispersal_ml.tre")
 
 phy_ml = read.tree(file = "dispersal_ml.tre")
+
+plot(phy_ml)
 
 # Your sequences are from two species and this next block will place the root of your phylogeny at the midpoint for "rooted_ml_tree". 
 
 rooted_ml_tree <- midpoint.root(phy_ml)
 plot(rooted_ml_tree)
 
-# In the next block we're going to plot your tree in a more visually pleasing manner rather than base R using the packages ggtree and ggplot. First your NJ tree (Note that the tip label is set large here (to 7) for what you need eventually in printing to pdf - you can reduce it if you'd like using the fontsize parameter below - try 3 - but return it to seven before you print). 
+# In the next blocks we're going to plot your tree in a more visually pleasing manner rather than base R using the packages ggtree and ggplot. (Note that the tip label is set large here (to 7) for what you need eventually in printing to pdf - you can reduce it if you'd like using the fontsize parameter below - try 3 - but return it to seven before you print). 
 
 mltree = ggplot(rooted_ml_tree) + geom_tree(linewidth = 1) + theme_tree()+ geom_treescale(fontsize =7)+geom_tiplab(size=7)
 
@@ -184,26 +201,35 @@ matrix
 
 p <- ggtree(rooted_ml_tree)
 
-# Now we will plot this tree with two colours of dots for each species 
+# Now we'll plot this with colours for the two species on their accessions
+
+colored_tree = p %<+% map_sites + 
+  geom_tiplab(aes(color = sp), size = 2) + 
+  scale_color_viridis_d(option = "viridis")+
+  geom_treescale(x=0, y=25, fontsize=4, linesize=1)+
+  theme(legend.position = "null")
+colored_tree
+
+
+# To make this more visually succinct, let's re-plot the tree with coloured dots for each species 
 
 p_colored <- p %<+% map_sites +
   geom_tippoint(aes(color = sp), size = 2) +
-  geom_treescale(x=0, y=25, fontsize=4, linesize=1)+# Color by column
-  scale_color_viridis_d(option = "viridis") + # Use viridis
+  geom_treescale(x=0, y=25, fontsize=4, linesize=1)+
+  scale_color_viridis_d(option = "viridis") + 
   theme(legend.position = "none")
 p_colored
 
+# Now you will combine your tree with your site matrix for each basin.  Make sure to add your own name to the title. 
 # Don't worry if the tree and matrix overlap in the plot window - the sizing has been made for the final pdf output.  
 
-# Combine your tree with your site matrix for each basin
-
 colored_tree_heatmap = gheatmap(p_colored, matrix , low = "white",high = "#1099dd",color="grey",offset=0.0015, width=0.1, font.size=2.5, 
-                                colnames_angle=45, hjust=1)+vexpand(.1, -1)+ theme(legend.position="none")
+                                colnames_angle=45, hjust=1)+vexpand(.1, -1)+ theme(legend.position="none")+
+  labs(title = "ML tree and collection site matrix for 2 copepod spp.")
 colored_tree_heatmap
 
 
-#Now it's time to consider how genetic variation is related to geographic distance
-# Isolation by distance (or IBD)
+# Now it's time to consider how genetic variation is related to geographic distance.Isolation by distance (or IBD)
 
 # Since these are within species calculations (intra-specific ) - first you must break your dataset into two
 
@@ -223,12 +249,11 @@ distance_matrix_a <- st_distance(sites_a, sites_a)
 distance_matrix_km_a <- units::set_units(st_distance(sites_a, sites_a), "km")
 distance_matrix_km_a <- as.dist(distance_matrix_km_a)
 
-# Because these distances are pairwise - the measures are not independent of each other
-# therefore rather than a regression, perform a Mantel test in vegan to test the relationship between genetic and geographic distance
+# Because these distances are pairwise - the measures are not independent of each other therefore rather than a regression, perform a Mantel test in vegan to test the relationship between genetic and geographic distance
 
 mantel_res_a <- mantel(dist_a, distance_matrix_km_a, method = "spearman", permutations = 999)
 print(mantel_res_a)
-# is there significant isolation by distance within this species?
+# Is there significant isolation by distance within this species?
 
 
 # Combine distances into a single data frame so you can plot them
@@ -241,8 +266,6 @@ options(scipen = 999) # Set a high penalty to avoid scientific notation
 
 mantel_plot_a = ggplot(plot_data_a, aes(x = Geography, y = Diversity)) +
   geom_point() +
-  # geom_point(position = position_jitter(width = 20)) +
-  # above applies a 20km jitter to points 
   geom_smooth(method = "glm") +
   theme_minimal() +
   labs(title = "Distance Decay in Genetic Diversity species A",
@@ -266,7 +289,7 @@ distance_matrix_km_b <- as.dist(distance_matrix_km_b)
 # mantel test in vegan for species B
 mantel_res_b <- mantel(dist_b, distance_matrix_km_b, method = "spearman", permutations = 999)
 print(mantel_res_b)
-# is there significant isolation by distance within this species?
+# Is there significant isolation by distance within this species?
 
 plot_data_b <- data.frame(
   Geography = as.vector(distance_matrix_km_b),
@@ -277,8 +300,6 @@ options(scipen = 999)
 
 mantel_plot_b = ggplot(plot_data_b, aes(x = Geography, y = Diversity)) +
   geom_point() +
-  # geom_point(position = position_jitter(width = 20)) +
-  # above applies a 20km jitter to points 
   geom_smooth(method = "glm") +
   theme_minimal() +
   labs(title = "Distance Decay in Genetic Diversity species B",
@@ -287,17 +308,14 @@ mantel_plot_b = ggplot(plot_data_b, aes(x = Geography, y = Diversity)) +
 mantel_plot_b
 
 
-# You now need to put the two species data sets together to plot them. This will use the library dplyr.
+# To plot the two species together, you need to put the two species data sets together. This will use the library dplyr.
 
 long_df <- bind_rows(list("Species B" = plot_data_b, "Species A" = plot_data_a), .id = "source")
 
-# Now, plot set of pairwise distances (genetic and geographic) to visualise whether
-# genetic differentiation correlates with the geographic distance among sites.
+# Now, plot the combined set of pairwise distances (genetic and geographic) to visualise whether genetic differentiation correlates with the geographic distance among sites. Please add your own name into the title. 
 
 mantel_plot_both = ggplot(long_df, aes(x = Geography, y = Diversity, color = source)) +
   geom_point() +
-  # geom_point(position = position_jitter(width = 20)) +
-  # above applies a 20km jitter to points 
   geom_smooth(method = "glm") +
   scale_color_viridis_d(option = "viridis")+
   theme_minimal() +
@@ -306,9 +324,11 @@ mantel_plot_both = ggplot(long_df, aes(x = Geography, y = Diversity, color = sou
        y = "Genetic Distance")
 mantel_plot_both
 
-# Now that you've made the two phylogenies and appended the site information, the next code block uses the pdf command below to make a single Acrobat file of your map and phylogenies. A printout of this pdf is what you should have on hand as a visual aid for your video submission of this assignment. 
+# Now that you've made your phylogeny (with attached site information) and completed your analysis of isolation by distance; the next code block uses the pdf command below to make a single Acrobat file of your map, phylogeny, and combined IBD analysis. 
 
-pdf("ZOO3700 deep-sea vent sequences with metadata - dispersal assignment - 260423.pdf", width = 10, height = 6) # Open a new pdf file
+# A printout of this pdf is what you should have on hand as a visual aid for your video submission of this assignment. 
+
+pdf("ZOO3700 deep-sea vent sequences with metadata - dispersal assignment - your name.pdf", width = 10, height = 6) # Open a new pdf file
 
 vent_map
 colored_tree_heatmap
@@ -322,13 +342,13 @@ dev.off()
 
 # The final part of your assignment is to record yourself (using the print out as a visual aid) as you speak for three minutes (!!without notes!!) about the conclusions you made regarding the larval dispersal of the two species based on your analysis. 
 
-# Using your phylogeny and the IBD plot, explain which taxon likely possesses planktotrophic larvae and which taxon is likely to possess lecithotrophic larvae? Why?
+# Q1- Using your phylogeny and the IBD plot, explain which taxon likely possesses planktotrophic larvae and which taxon is likely to possess lecithotrophic larvae? Why?
 
-# Is there evidence of IBD or fragmentation within a basin?  Explain.
+# Q2 - Is there evidence of IBD or fragmentation within a basin?  Explain.
 
-# Based on your phylogeny and your IBD plot, which of the basins would you estimate is more fragmented/isolated? 
+# Q3 - Based on your phylogeny and your IBD plot, which of the basins would you estimate is more fragmented/isolated? 
 
-# If mining companies were to target the region for development, would this have the same effect on all species living at and around deep-sea vents? Why or why not? 
+# Q4 - If mining companies were to target the region for development, would this have the same effect on all species living at and around deep-sea vents? Why or why not? 
 
 # GOOD LUCK!
 
