@@ -84,7 +84,7 @@ sites_sf <- st_as_sf(map_sites, coords = c("lon", "lat"), crs = 4326)
 # Load Map Data
 world <- ne_countries(scale = "medium", returnclass = "sf")
 
-# Forst, a global Map
+# First, a global Map
 vent_map_1 = ggplot(data = world) +
   geom_sf(fill = "antiquewhite", color = "gray50") +
   # Plot points
