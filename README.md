@@ -12,7 +12,7 @@
 
 # Make sure to install R BEFORE installing R studio.  
 
-# Once you have both R and R studio installed, download the three files (.R and 2 .csv files) from the GitHub repository and put them in your working directory (don't know here that is?  we'll get to that in a second!)
+# Once you have both R and R studio installed, download the files (.R and .csv) from the GitHub repository and put them in your working directory (don't know here that is?  we'll get to that in a second!)
 
 # Open up the .R extension file from R.Studio.  You can either work from the console window the (">") and follow along here by copying the commands from GitHub (the smaller text are the commands to copy, the larger text is me talking to you) to the R console window, or by selecting the command blocks in the .R window and then pressing "Run". This option will be faster. 
 
