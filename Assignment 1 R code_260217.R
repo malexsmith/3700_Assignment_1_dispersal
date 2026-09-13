@@ -12,7 +12,7 @@
 
 # Make sure to install R BEFORE installing R studio.  
 
-# Once you have both R and R studio installed, download the three files (.R and 2 .csv files) from the GitHub repository and put them in your working directory (don't know here that is?  we'll get to that in a second!)
+# Once you have both R and R studio installed, download the files (.R and .csv) from the GitHub repository and put them in your working directory (don't know here that is?  we'll get to that in a second!)
 
 # Open up the .R extension file from R.Studio.  You can either work from the console window the (">") and follow along here by copying the commands from GitHub (the smaller text are the commands to copy, the larger text is me talking to you) to the R console window, or by selecting the command blocks in the .R window and then pressing "Run". This option will be faster. 
 
@@ -189,7 +189,7 @@ mltree
 # Congratulations - you have constructed a ML phylogeny from publicly available deep-sea vent species!  
 # Now you need to append the metadata about these sequences (what basin on your map were they from). 
 
-# To do this, you need to refer back to the first .csv you accessed (map_sites). This .csv file includes the site information associated with each sample sequence. Remember to make sure that this .csv file is in whatever directory/folder you set as the working directory.  
+# To do this, you need to refer back to the input from the first .csv you uploaded (now called "map_sites"). This file includes the site information associated with each sample sequence.  
 # The next code block creates a matrix of sample accessions and basins these samples came from. 
 
 matrix = with(map_sites, table(map_sites$accession, map_sites$basin))
@@ -338,7 +338,7 @@ dev.off()
 
 # So - hats off to you!! You've made a map and a phylogeny and plotted isolation by distance from publicly available DNA sequences that were collected from two species of deep-sea vent copepods. 
 
-# Now, print your pdf (your hard copy), reflect on the map, the phylogeny and the IBD plot you created in this assignment.
+# Now, print your pdf (your hard copy), reflect on the map, the phylogeny and the IBD plot you created in this assignment. 
 
 # The final part of your assignment is to record yourself (using the print out as a visual aid) as you speak for three minutes (!!without notes!!) about the conclusions you made regarding the larval dispersal of the two species based on your analysis. 
 
