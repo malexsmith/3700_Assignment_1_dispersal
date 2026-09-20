@@ -84,8 +84,11 @@ sites_sf <- st_as_sf(map_sites, coords = c("lon", "lat"), crs = 4326)
 # Load Map Data
 world <- ne_countries(scale = "medium", returnclass = "sf")
 
+# Now transform to the Equal Earth 
+world_equal_earth <- st_transform(world, crs = 8857)
+
 # First, a global Map
-vent_map_1 = ggplot(data = world) +
+vent_map_1 = ggplot(data = world_equal_earth) +
   geom_sf(fill = "antiquewhite", color = "gray50") +
   # Plot points
   geom_sf(data = sites_sf, aes(color = basin), size = 3) +
