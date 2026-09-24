@@ -104,7 +104,6 @@ vent_map_1
 
 vent_map = ggplot(data = world) +
   geom_sf(fill = "antiquewhite", color = "gray50") +
-  # Plot points
   geom_sf(data = sites_sf, aes(color = basin), size = 3) +
     annotation_scale(location = "bl", width_hint = 0.25) +
   coord_sf(xlim = c(100, 190), ylim = c(-40, 10), expand = FALSE) +
@@ -193,6 +192,7 @@ mltree
 # Now you need to append the metadata about these sequences (what basin on your map were they from). 
 
 # To do this, you need to refer back to the input from the first .csv you uploaded (now called "map_sites"). This file includes the site information associated with each sample sequence.  
+
 # The next code block creates a matrix of sample accessions and basins these samples came from. 
 
 matrix = with(map_sites, table(map_sites$accession, map_sites$basin))
@@ -341,7 +341,7 @@ dev.off()
 
 # So - hats off to you!! You've made a map and a phylogeny and plotted isolation by distance from publicly available DNA sequences that were collected from two species of deep-sea vent copepods. 
 
-# Now, print your pdf (your hard copy), reflect on the map, the phylogeny and the IBD plot you created in this assignment. 
+# Now, print your pdf (your hard copy), reflect on the map, the phylogeny and the IBD plot you created in this assignment.
 
 # The final part of your assignment is to record yourself (using the print out as a visual aid) as you speak for three minutes (!!without notes!!) about the conclusions you made regarding the larval dispersal of the two species based on your analysis. 
 
