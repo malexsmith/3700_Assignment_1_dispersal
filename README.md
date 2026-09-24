@@ -90,7 +90,6 @@ world_equal_earth <- st_transform(world, crs = 8857)
 # First, a global Map
 vent_map_1 = ggplot(data = world_equal_earth) +
   geom_sf(fill = "antiquewhite", color = "gray50") +
-  # Plot points
   geom_sf(data = sites_sf, aes(color = basin), size = 3) +
   annotation_scale(location = "bl", width_hint = 0.25) +
   theme_minimal() +
